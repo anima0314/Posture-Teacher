@@ -39,8 +39,8 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity";
+public class MeasureActivity extends AppCompatActivity {
+    private static final String TAG = "MeasureActivity";
     private static final String BINARY_GRAPH_NAME = "pose_tracking_gpu.binarypb";
     private static final String INPUT_VIDEO_STREAM_NAME = "input_video";
     private static final String OUTPUT_VIDEO_STREAM_NAME = "output_video";
@@ -391,7 +391,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     protected int getContentViewLayoutResId() {
-        return R.layout.activity_main;
+        return R.layout.activity_measure;
     }
 
     @Override

@@ -31,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.gnupr.postureteacher.descriptionActivity" />
-        <activity android:name="com.gnupr.postureteacher.MainActivity" />
+        <activity android:name="com.gnupr.postureteacher.MeasureActivity" />
     </application>
 
 </manifest>

@@ -17,7 +17,7 @@ public class descriptionActivity extends AppCompatActivity{
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MeasureActivity.class);
                 startActivity(intent);
             }
         });
