@@ -30,8 +30,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.gnupr.postureteacher.descriptionActivity" />
+        <activity android:name="com.gnupr.postureteacher.MainActivity" />
         <activity android:name="com.gnupr.postureteacher.MeasureActivity" />
+        <activity android:name="com.gnupr.postureteacher.DescriptionActivity" />
+        <activity android:name="com.gnupr.postureteacher.StatsActivity" />
     </application>
 
 </manifest>

@@ -20,7 +20,7 @@ public class LogoActivity extends AppCompatActivity {
             public void run()
             {
                 //new Intent(현재 context, 이동할 activity)
-                Intent intent = new Intent(getApplicationContext(), descriptionActivity.class);
+                Intent intent = new Intent(getApplicationContext(), DescriptionActivity.class);
                 startActivity(intent);	//intent 에 명시된 액티비티로 이동
 
                 finish();	//현재 액티비티 종료
