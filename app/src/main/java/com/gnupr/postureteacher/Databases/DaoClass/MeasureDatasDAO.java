@@ -7,7 +7,6 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.gnupr.postureteacher.Databases.EntityClass.MeasureDatasEntity;
-import com.gnupr.postureteacher.Databases.EntityClass.MeasureRoundsEntity;
 
 import java.time.LocalDateTime;
 import java.util.List;

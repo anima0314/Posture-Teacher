@@ -7,7 +7,6 @@ import androidx.room.Update;
 
 import com.gnupr.postureteacher.Databases.EntityClass.MeasureRoundsEntity;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Dao
