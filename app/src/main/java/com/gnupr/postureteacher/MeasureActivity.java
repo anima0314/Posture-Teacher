@@ -1,8 +1,10 @@
 package com.gnupr.postureteacher;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Handler;
@@ -36,8 +38,11 @@ import com.google.mediapipe.framework.Packet;
 import com.google.mediapipe.glutil.EglManager;
 import com.google.protobuf.InvalidProtocolBufferException;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MeasureActivity extends AppCompatActivity {
     private static final String TAG = "MeasureActivity";
@@ -63,8 +68,57 @@ public class MeasureActivity extends AppCompatActivity {
     private CameraXPreviewHelper cameraHelper;
 
 
+    Handler ui_Handler = null;
+    //UI 스레드 용 핸들러
+    boolean ui_HandlerCheck = true;
+    //UI 스레드 체크용
+    private boolean startThreadCheck = true;
+
+    private boolean startDialogCheck = true;
+    //타이머 다이얼로그 시작 확인
+
+
+    private int timer_hour, timer_minute, timer_second;
+    //글로벌 시간
+    private String text_hour, text_minute, text_second;
+    //텍스트 상의 시간
+    private String nowTime;
+    //지금 시간
+    private int totalTime = 0;
+    //전체 시간
+    private int globalTime = 0;
+    //시작 이후의 시간
+
+    LocalDateTime timeMeasureDataStart = LocalDateTime.now();
+    LocalDateTime timeMeasureDataEnd = LocalDateTime.now();
+    //현재 전체 측정 시간
+    private boolean timeDataCheck = true;
+    //측정 시간 측정해도 되는지
+
+    LocalDateTime timeMeasureRoundStart = LocalDateTime.now();
+    LocalDateTime timeMeasureRoundEnd = LocalDateTime.now();
+    //현재 상세 시간
+    private boolean timeRoundCheck = true;
+    //상세 시간 측정해도 되는지
+
+
+    private String[] divideTime;
+    //문자열에서 분할된 시간
+    private Timer timer = new Timer();
+    private boolean pauseTimerCheck = false;
+    //false = 흘러감, true = 멈춤
+    private String UseTimerTimeDB = "00:00:31";
+    //템플릿 타이머 시간 (시간:분:초)
+    private final long finishtimeed = 2500;
+    private long presstime = 0;
+
+    private int finalStopCheck = 0;
+    //완전 종료 대기 확인
+    //0 아무것도 아님, 1 돌입 대기, 2 돌입
+
     private TextView tv2;
     private TextView tv6;
+    private TextView tv_TimeCounter;
 
     private ImageView iv1;
     private ImageView iv2;
@@ -98,19 +152,13 @@ public class MeasureActivity extends AppCompatActivity {
     private float ratioPoint_1a, ratioPoint_1b, ratioPoint_2a, ratioPoint_2b;
     //비율 계산에 쓰일 포인트 변수 (왼쪽, 오른쪽)
 
-    Handler ui_Handler = null;
-    private boolean startThreadCheck = true;
-    private boolean ui_HandlerCheck = false;
-
-    private final long finishtimeed = 2500;
-    private long presstime = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentViewLayoutResId());
         tv2 = findViewById(R.id.tv2);
         tv6 = findViewById(R.id.tv6);
+        tv_TimeCounter = findViewById(R.id.TimeCounter);
 
         iv1= findViewById(R.id.imageView3);
         iv2= findViewById(R.id.imageView4);
@@ -120,6 +168,10 @@ public class MeasureActivity extends AppCompatActivity {
         iv6= findViewById(R.id.imageView8);
 
         //tv.setText("000");
+        if (startDialogCheck) {
+            startDialog();
+            startDialogCheck = false;
+        }
         try {
             applicationInfo =
                     getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
@@ -235,6 +287,18 @@ public class MeasureActivity extends AppCompatActivity {
             else
                 getLandmarksAngleResult(1);
                 //오른쪽
+
+            if(finalStopCheck == 1){
+                //saveDataConcentration();
+                //saveDataMeasurement();
+            }
+            if(finalStopCheck == 2 && timer_second <= 1) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                pauseTimerCheck = true;
+                ui_HandlerCheck = false;
+                finish();
+            }
 
             try {
                 Thread.sleep(500);
@@ -542,5 +606,94 @@ public class MeasureActivity extends AppCompatActivity {
             presstime = tempTime;
             Toast.makeText(getApplicationContext(), "한 번 더 누르면 뒤로 갑니다", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    TimerTask timerTask = new TimerTask() {
+        @Override
+        public void run() {
+            // 반복실행할 구문
+            globalTime++;
+            if(!pauseTimerCheck) {
+                // 0초 이상이면
+                if (timer_second != 0) {
+                    //1초씩 감소
+                    timer_second--;
+
+                    // 0분 이상이면
+                } else if (timer_minute != 0) {
+                    // 1분 = 60초
+                    timer_second = 60;
+                    timer_second--;
+                    timer_minute--;
+
+                    // 0시간 이상이면
+                } else if (timer_hour != 0) {
+                    // 1시간 = 60분
+                    timer_second = 60;
+                    timer_minute = 60;
+                    timer_second--;
+                    timer_minute--;
+                    timer_hour--;
+                }
+
+                //시, 분, 초가 10이하(한자리수) 라면
+                // 숫자 앞에 0을 붙인다 ( 8 -> 08 )
+                if (timer_second <= 9) {
+                    text_second = "0" + timer_second;
+                } else {
+                    text_second = Integer.toString(timer_second);
+                }
+
+                if (timer_minute <= 9) {
+                    text_minute = "0" + timer_minute;
+                } else {
+                    text_minute = Integer.toString(timer_minute);
+                }
+
+                if (timer_hour <= 9) {
+                    text_hour = "0" + timer_hour;
+                } else {
+                    text_hour = Integer.toString(timer_minute);
+                }
+                nowTime = text_hour + ":" + text_minute + ":" + text_second;
+                if(finalStopCheck == 0) {
+                    tv_TimeCounter.setText(nowTime);
+                }
+                else if(finalStopCheck == 1 || finalStopCheck == 2) {
+                    tv_TimeCounter.setText(timer_second + "초 후 메인화면");
+                }
+            }
+
+            if (timer_hour == 0 && timer_minute == 0 && timer_second == 0) {
+                /*timerTask.cancel();//타이머 종료
+                timer.cancel();//타이머 종료
+                timer.purge();//타이머 종료*/
+                //중간에 잠시 멈추는 건 타이머를 죽이는 게 아니라 타이머를 보기로만 잠시 멈춰두고 다시 시작할 때 시간을 새로 갱신
+                if(finalStopCheck == 0) {
+                    timer_second += 10;
+                    finalStopCheck = 1;
+                }
+            }
+        }
+    };
+    private void startDialog() {
+        //이건 자르던지 바꾸던지 하셈
+        AlertDialog.Builder msgBuilder = new AlertDialog.Builder(MeasureActivity.this)
+                .setTitle("시작 전 준비")
+                .setMessage("하단의 확인 버튼을 누르고 나서 정확히 30초 뒤에 자세 측정이 실행됩니다. 그동안 휴대폰을 적당한 위치에 배치해주시길 바랍니다.")
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        divideTime = UseTimerTimeDB.split(":");
+                        timer_hour = Integer.parseInt(divideTime[0]);
+                        timer_minute = Integer.parseInt(divideTime[1]);
+                        timer_second = Integer.parseInt(divideTime[2]);
+                        totalTime = ((((timer_hour * 60) + timer_minute) * 60) + timer_second) * 1000;
+                        timer.scheduleAtFixedRate(timerTask, 5000, 1000); //Timer 실행
+                    }
+                });
+        AlertDialog msgDlg = msgBuilder.create();
+        msgDlg.show();
     }
 }
