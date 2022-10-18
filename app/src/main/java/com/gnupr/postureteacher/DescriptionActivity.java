@@ -12,15 +12,7 @@ public class DescriptionActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_descripstion);
 
-        Button imageButton = (Button) findViewById(R.id.startmeasurebtn);
-        imageButton.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MeasureActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 }
 
