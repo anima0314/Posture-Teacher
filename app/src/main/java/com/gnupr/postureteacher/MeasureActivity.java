@@ -116,16 +116,16 @@ public class MeasureActivity extends AppCompatActivity {
     //완전 종료 대기 확인
     //0 아무것도 아님, 1 돌입 대기, 2 돌입
 
-    private TextView tv2;
-    private TextView tv6;
+    //private TextView tv2;
+    //private TextView tv6;
     private TextView tv_TimeCounter;
 
     private ImageView iv1;
     private ImageView iv2;
-    private ImageView iv3;
+    //private ImageView iv3;
     private ImageView iv4;
     private ImageView iv5;
-    private ImageView iv6;
+    //private ImageView iv6;
 
     class markPoint {
         float x;
@@ -157,16 +157,15 @@ public class MeasureActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentViewLayoutResId());
-        tv2 = findViewById(R.id.tv2);
-        tv6 = findViewById(R.id.tv6);
-        tv_TimeCounter = findViewById(R.id.TimeCounter);
+        //tv2 = findViewById(R.id.tv2);
+        //tv6 = findViewById(R.id.tv6);
 
         iv1= findViewById(R.id.imageView3);
         iv2= findViewById(R.id.imageView4);
-        iv3= findViewById(R.id.imageView5);
+        //iv3= findViewById(R.id.imageView5);
         iv4= findViewById(R.id.imageView6);
         iv5= findViewById(R.id.imageView7);
-        iv6= findViewById(R.id.imageView8);
+        //iv6= findViewById(R.id.imageView8);
 
         //tv.setText("000");
         if (startDialogCheck) {
@@ -219,29 +218,29 @@ public class MeasureActivity extends AppCompatActivity {
                         byte[] landmarksRaw = PacketGetter.getProtoBytes(packet);
                         try {
                             NormalizedLandmarkList poseLandmarks = NormalizedLandmarkList.parseFrom(landmarksRaw);
-                            tv6.setText("a");
+                            //tv6.setText("a");
                             ratioPoint_1a = poseLandmarks.getLandmark(11).getY() * 1000f;
                             ratioPoint_1b = poseLandmarks.getLandmark(13).getY() * 1000f;
                             ratioPoint_2a = poseLandmarks.getLandmark(12).getY() * 1000f;
                             ratioPoint_2b = poseLandmarks.getLandmark(14).getY() * 1000f;
-                            tv6.setText("b");
+                            //tv6.setText("b");
                             for (int i = 0; i <= 32; i++) {
                                 bodyMarkPoint[i] = new markPoint();
-                                tv6.setText("c");
+                                //tv6.setText("c");
                                 bodyAdvancePoint[i] = poseLandmarks.getLandmark(i);
-                                tv6.setText("d");
+                                //tv6.setText("d");
                                 bodyMarkPoint[i].x = bodyAdvancePoint[i].getX() * 1000f;
-                                tv6.setText("e");
+                                //tv6.setText("e");
                                 bodyMarkPoint[i].y = bodyAdvancePoint[i].getY() * 1000f;
-                                tv6.setText("f");
+                                //tv6.setText("f");
                                 bodyMarkPoint[i].z = bodyAdvancePoint[i].getZ() * 1000f;
-                                tv6.setText("g");
+                                //tv6.setText("g");
                                 bodyRatioMeasurement[i] = bodyMarkPoint[i].x / (ratioPoint_1b - ratioPoint_1a);
-                                tv6.setText("h");
+                                //tv6.setText("h");
                                 bodyRatioMeasurement[i] = bodyMarkPoint[i].y / (ratioPoint_1b - ratioPoint_1a);
-                                tv6.setText("i");
+                                //tv6.setText("i");
                                 bodyRatioMeasurement[i] = bodyMarkPoint[i].z / (ratioPoint_1b - ratioPoint_1a);
-                                tv6.setText("k");
+                                //tv6.setText("k");
                                 if ((-100f <= bodyMarkPoint[i].x && bodyMarkPoint[i].x <= 1100f) && (-100f <= bodyMarkPoint[i].y && bodyMarkPoint[i].y <= 1100f))
                                     OutOfRangeSave[i] = true;
                                 else
@@ -269,17 +268,17 @@ public class MeasureActivity extends AppCompatActivity {
         public void run() {
             //정상판별
             if (sideTotalResult[1] && sideTotalResult[0]) {
-                tv6.setText("1");
-                tv2.setText("현 자세 정상입니다.");
+                //tv6.setText("1");
+                //tv2.setText("현 자세 정상입니다.");
             } else if (sideTotalResult[1]) {
-                tv6.setText("2");
-                tv2.setText("오른쪽 자세 정상입니다.");
+                //tv6.setText("2");
+                //tv2.setText("오른쪽 자세 정상입니다.");
             } else if (sideTotalResult[0]) {
-                tv6.setText("3");
-                tv2.setText("왼쪽 자세 정상입니다.");
+                //tv6.setText("3");
+                //tv2.setText("왼쪽 자세 정상입니다.");
             } else {
-                tv6.setText("4");
-                tv2.setText("현 자세 비정상입니다.");
+                //tv6.setText("4");
+                //tv2.setText("현 자세 비정상입니다.");
             }
 
             if (bodyMarkPoint[11].z > bodyMarkPoint[12].z)
@@ -346,19 +345,19 @@ public class MeasureActivity extends AppCompatActivity {
                 //시, 분, 초가 10이하(한자리수) 라면
                 // 숫자 앞에 0을 붙인다 ( 8 -> 08 )
                 if (timer_second <= 9) {
-                    text_second = "0" + timer_second;
+                    text_second = "0" + Integer.toString(timer_second);
                 } else {
                     text_second = Integer.toString(timer_second);
                 }
 
                 if (timer_minute <= 9) {
-                    text_minute = "0" + timer_minute;
+                    text_minute = "0" + Integer.toString(timer_minute);
                 } else {
                     text_minute = Integer.toString(timer_minute);
                 }
 
                 if (timer_hour <= 9) {
-                    text_hour = "0" + timer_hour;
+                    text_hour = "0" + Integer.toString(timer_hour);
                 } else {
                     text_hour = Integer.toString(timer_minute);
                 }
@@ -377,7 +376,7 @@ public class MeasureActivity extends AppCompatActivity {
                 timer.purge();//타이머 종료*/
                 //중간에 잠시 멈추는 건 타이머를 죽이는 게 아니라 타이머를 보기로만 잠시 멈춰두고 다시 시작할 때 시간을 새로 갱신
                 if(finalStopCheck == 0) {
-                    timer_second += 10;
+                    timer_second += 3;
                     finalStopCheck = 1;
                 }
             }
@@ -385,6 +384,7 @@ public class MeasureActivity extends AppCompatActivity {
     };
     private void startDialog() {
         //이건 자르던지 바꾸던지 하셈
+        tv_TimeCounter = findViewById(R.id.TimeCounter);
         AlertDialog.Builder msgBuilder = new AlertDialog.Builder(MeasureActivity.this)
                 .setTitle("시작 전 준비")
                 .setMessage("하단의 확인 버튼을 누르고 나서 정확히 30초 뒤에 자세 측정이 실행됩니다. 그동안 휴대폰을 적당한 위치에 배치해주시길 바랍니다.")
@@ -402,6 +402,20 @@ public class MeasureActivity extends AppCompatActivity {
                 });
         AlertDialog msgDlg = msgBuilder.create();
         msgDlg.show();
+    }
+
+    public void onClickExit(View view) {
+        if(1 <= globalTime) {
+            if(finalStopCheck == 0) {
+                saveMeasureRounds();
+                saveMeasureDatas();
+            }
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            pauseTimerCheck = true;
+            ui_HandlerCheck = false;
+            finish();
+        }
     }
 
     private void saveMeasureRounds() { //여기가 측정 시간 저장, 전체
@@ -485,7 +499,7 @@ public class MeasureActivity extends AppCompatActivity {
             iv2.setImageResource(R.drawable.neck_gray);
             markResult[7 + side][11 + side][23 + side] = true;
         }
-
+        /*
         if (OutOfRangeSave[11 + side] == true && OutOfRangeSave[13 + side] == true && OutOfRangeSave[15 + side] == true) { //범위 판별
             angleCalculationResult(11 + side, 13 + side, 15 + side, 80f, 130f); //140f 180f | 120f 180f X //90f 120f
             //엉덩이-팔꿈치-귀
@@ -498,7 +512,7 @@ public class MeasureActivity extends AppCompatActivity {
             //여기에 비감지(회색)
             iv3.setImageResource(R.drawable.elbow_gray);
             markResult[11 + side][13 + side][15 + side] = true;
-        }
+        }*/
 
         bodyMarkPoint[33 + side] = new markPoint();
         if(side == 0)
@@ -542,7 +556,7 @@ public class MeasureActivity extends AppCompatActivity {
             iv5.setImageResource(R.drawable.knee_gray);
             markResult[23 + side][25 + side][27 + side] = true;
         }
-
+/*
         if (OutOfRangeSave[25 + side] == true && OutOfRangeSave[29 + side] == true && OutOfRangeSave[31 + side] == true) { //범위 판별
             angleCalculationResult(25 + side, 29 + side, 31 + side, 90f, 130f); //100f 120f | 80f 140f
             //무릎-뒷꿈치-발 발목각도
@@ -555,7 +569,7 @@ public class MeasureActivity extends AppCompatActivity {
             //여기에 비감지(회색)
             iv6.setImageResource(R.drawable.ankle_gray);
             markResult[25 + side][29 + side][31 + side] = true;
-        }
+        }*/
 
         if (markResult[11 + side][23 + side][25 + side] && markResult[7 + side][11 + side][23 + side] && markResult[11 + side][13 + side][15 + side]
                 && markResult[7 + side][7 + side][11 + side] && markResult[23 + side][25 + side][27 + side] && markResult[25 + side][29 + side][31 + side])
