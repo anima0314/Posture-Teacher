@@ -597,7 +597,7 @@ public class MeasureActivity extends AppCompatActivity {
         if (0 <= intervalTime && finishtimeed >= intervalTime)
         {
             ui_HandlerCheck = true;
-            Intent intent = new Intent(getApplicationContext(), DescriptionActivity.class);
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);	//intent 에 명시된 액티비티로 이동
             finish();
         }

@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        Button imageButton = (Button) findViewById(R.id.start_button);
+        Button imageButton = findViewById(R.id.start_button);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,5 +49,6 @@ public class MainActivity extends AppCompatActivity {
     private void myStartActivity(Class c) {
         Intent intent = new Intent(this, c);
         startActivity(intent);
+        finish();
     }
 }
