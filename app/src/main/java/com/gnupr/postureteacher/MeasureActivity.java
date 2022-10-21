@@ -152,6 +152,7 @@ public class MeasureActivity extends AppCompatActivity {
     private float ratioPoint_1a, ratioPoint_1b, ratioPoint_2a, ratioPoint_2b;
     //비율 계산에 쓰일 포인트 변수 (왼쪽, 오른쪽)
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -289,10 +290,10 @@ public class MeasureActivity extends AppCompatActivity {
                 //오른쪽
 
             if(finalStopCheck == 1){
-                //saveDataConcentration();
-                //saveDataMeasurement();
+                saveMeasureRounds();
+                saveMeasureDatas();
             }
-            if(finalStopCheck == 2 && timer_second <= 1) {
+            if(finalStopCheck == 2 && timer_second <= 0) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 pauseTimerCheck = true;
@@ -306,34 +307,144 @@ public class MeasureActivity extends AppCompatActivity {
                 e.printStackTrace();
                 startThreadCheck = true;
             }
-            if(ui_HandlerCheck == false) {
+            if(ui_HandlerCheck) {
                 ui_Handler.post(this);
             }
         }
     }
-/*
-    public void angleCalculationNumber(int firstPoint, int secondPoint, int thirdPoint, int oneNumber, int twoNumber) {
-        resultAngleSave[oneNumber][twoNumber] =
-                getLandmarksAngleTwo(bodyMarkPoint[firstPoint], bodyMarkPoint[secondPoint], bodyMarkPoint[thirdPoint], 'x', 'y');
-    }
 
-    public void getAngleCalculationNumber(int side) { //0=왼쪽, 1=오른쪽
-        angleCalculationNumber(11 + side, 23 + side, 25 + side, side, 0);
-        angleCalculationNumber(7 + side, 11 + side, 23 + side, side, 1);
-        angleCalculationNumber(7 + side, 13 + side, 23 + side, side, 2);
 
-        resultAngleSave[side][3] =
-                getLandmarksAngleTwo(bodyMarkPoint[firstPoint], bodyMarkPoint[secondPoint], bodyMarkPoint[thirdPoint], 'x', 'y');
 
-        bodyTempPoint[7 + side] = bodyMarkPoint[7 + side];
-        bodyTempPoint[7 + side].x = bodyTempPoint[7 + side].x + 300f;
-        if (!Double.isNaN(getLandmarksAngleTwo(bodyTempPoint[7 + side], bodyMarkPoint[7 + side], bodyMarkPoint[11 + side], 'x', 'y'))) {
-                markResult[7 + side][7 + side][11 + side] = true;
+    TimerTask timerTask = new TimerTask() {
+        @Override
+        public void run() {
+            // 반복실행할 구문
+            globalTime++;
+            if(!pauseTimerCheck) {
+                // 0초 이상이면
+                if (timer_second != 0) {
+                    //1초씩 감소
+                    timer_second--;
+
+                    // 0분 이상이면
+                } else if (timer_minute != 0) {
+                    // 1분 = 60초
+                    timer_second = 60;
+                    timer_second--;
+                    timer_minute--;
+
+                    // 0시간 이상이면
+                } else if (timer_hour != 0) {
+                    // 1시간 = 60분
+                    timer_second = 60;
+                    timer_minute = 60;
+                    timer_second--;
+                    timer_minute--;
+                    timer_hour--;
+                }
+
+                //시, 분, 초가 10이하(한자리수) 라면
+                // 숫자 앞에 0을 붙인다 ( 8 -> 08 )
+                if (timer_second <= 9) {
+                    text_second = "0" + timer_second;
+                } else {
+                    text_second = Integer.toString(timer_second);
+                }
+
+                if (timer_minute <= 9) {
+                    text_minute = "0" + timer_minute;
+                } else {
+                    text_minute = Integer.toString(timer_minute);
+                }
+
+                if (timer_hour <= 9) {
+                    text_hour = "0" + timer_hour;
+                } else {
+                    text_hour = Integer.toString(timer_minute);
+                }
+                nowTime = text_hour + ":" + text_minute + ":" + text_second;
+                if(finalStopCheck == 0) {
+                    tv_TimeCounter.setText(nowTime);
+                }
+                else if(finalStopCheck == 1 || finalStopCheck == 2) {
+                    tv_TimeCounter.setText(timer_second + "초 후 메인화면");
+                }
+            }
+
+            if (timer_hour == 0 && timer_minute == 0 && timer_second == 0) {
+                /*timerTask.cancel();//타이머 종료
+                timer.cancel();//타이머 종료
+                timer.purge();//타이머 종료*/
+                //중간에 잠시 멈추는 건 타이머를 죽이는 게 아니라 타이머를 보기로만 잠시 멈춰두고 다시 시작할 때 시간을 새로 갱신
+                if(finalStopCheck == 0) {
+                    timer_second += 10;
+                    finalStopCheck = 1;
+                }
+            }
         }
-        angleCalculationNumber(23 + side, 25 + side, 27 + side, side, 4);
-        angleCalculationNumber(25 + side, 29 + side, 31 + side, side, 5);
+    };
+    private void startDialog() {
+        //이건 자르던지 바꾸던지 하셈
+        AlertDialog.Builder msgBuilder = new AlertDialog.Builder(MeasureActivity.this)
+                .setTitle("시작 전 준비")
+                .setMessage("하단의 확인 버튼을 누르고 나서 정확히 30초 뒤에 자세 측정이 실행됩니다. 그동안 휴대폰을 적당한 위치에 배치해주시길 바랍니다.")
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        divideTime = UseTimerTimeDB.split(":");
+                        timer_hour = Integer.parseInt(divideTime[0]);
+                        timer_minute = Integer.parseInt(divideTime[1]);
+                        timer_second = Integer.parseInt(divideTime[2]);
+                        totalTime = ((((timer_hour * 60) + timer_minute) * 60) + timer_second) * 1000;
+                        timer.scheduleAtFixedRate(timerTask, 7000, 1000); //Timer 실행
+                    }
+                });
+        AlertDialog msgDlg = msgBuilder.create();
+        msgDlg.show();
     }
-    */
+
+    private void saveMeasureRounds() { //여기가 측정 시간 저장, 전체
+        /*String Meas_RecordNumberDB_txt = formatedNowLocalTime.trim();
+        String Meas_UseTimerNameDB_txt = UseTimerNameDB;
+        String Meas_UseTimerTimeDB_txt = UseTimerTimeDB;
+        LocalDateTime Meas_StartTimeDB_txt = startMeasDateTime;
+        endMeasDateTime = LocalDateTime.now();
+        LocalDateTime Meas_EndTimeDB_txt = endMeasDateTime;
+
+        MeasurementTableEntity modelMeasurementTable = new MeasurementTableEntity();
+        modelMeasurementTable.setMeas_RecordNumberDB(Meas_RecordNumberDB_txt);
+        modelMeasurementTable.setMeas_UseTimerNameDB(Meas_UseTimerNameDB_txt);
+        modelMeasurementTable.setMeas_UseTimerTimeDB(Meas_UseTimerTimeDB_txt);
+        modelMeasurementTable.setMeas_StartTimeDB(Meas_StartTimeDB_txt);
+        modelMeasurementTable.setMeas_EndTimeDB(Meas_EndTimeDB_txt);
+        DetectionRoomDatabase.getDatabase(getApplicationContext()).getMeasurementTableDao().insert(modelMeasurementTable);
+        //MeasurementRoomDatabase.getDatabase(getApplicationContext()).getMeasurementTableDao().deleteAll(); 이건 삭제*/
+
+        Toast.makeText(this, "전체 시간 저장", Toast.LENGTH_SHORT).show();
+        finalStopCheck = 2;
+    }
+
+
+    private void saveMeasureDatas() { //여기가 감지 집중 시간 저장, 일시
+        /*String Conc_RecordNumberDB_txt = formatedNowLocalTime.trim();
+        String Conc_UseTimerNameDB_txt = UseTimerNameDB;
+        String Conc_UseTimerTimeDB_txt = UseTimerTimeDB;
+        LocalDateTime Conc_StartTimeDB_txt = startConcDateTime;
+        endConcDateTime = LocalDateTime.now();
+        LocalDateTime Conc_EndTimeDB_txt = endConcDateTime;
+
+        ConcentrationTableEntity modelConcentrationTable = new ConcentrationTableEntity();
+        modelConcentrationTable.setConc_RecordNumberDB(Conc_RecordNumberDB_txt);
+        modelConcentrationTable.setConc_UseTimerNameDB(Conc_UseTimerNameDB_txt);
+        modelConcentrationTable.setConc_UseTimerTimeDB(Conc_UseTimerTimeDB_txt);
+        modelConcentrationTable.setConc_StartTimeDB(Conc_StartTimeDB_txt);
+        modelConcentrationTable.setConc_EndTimeDB(Conc_EndTimeDB_txt);
+        DetectionRoomDatabase.getDatabase(getApplicationContext()).getConcentrationTableDao().insert(modelConcentrationTable);
+        //MeasurementRoomDatabase.getDatabase(getApplicationContext()).getMeasurementTableDao().deleteAll(); 이건 삭제*/
+
+        Toast.makeText(this, "상세 시간 저장", Toast.LENGTH_SHORT).show();
+    }
 
     public void angleCalculationResult(int firstPoint, int secondPoint, int thirdPoint, float oneAngle, float twoAngle) {
         if (getLandmarksAngleTwo(bodyMarkPoint[firstPoint], bodyMarkPoint[secondPoint], bodyMarkPoint[thirdPoint], 'x', 'y') >= oneAngle
@@ -453,7 +564,49 @@ public class MeasureActivity extends AppCompatActivity {
             sideTotalResult[side] = false;
     }
 
+    public static float getLandmarksAngleTwo(markPoint p1, markPoint p2, markPoint p3, char a, char b) {
+        float p1_2 = 0f, p2_3 = 0f, p3_1 = 0f;
+        if (a == b) {
+            return 0;
+        } else if ((a == 'x' || b == 'x') && (a == 'y' || b == 'y')) {
+            p1_2 = (float) Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
+            p2_3 = (float) Math.sqrt(Math.pow(p2.x - p3.x, 2) + Math.pow(p2.y - p3.y, 2));
+            p3_1 = (float) Math.sqrt(Math.pow(p3.x - p1.x, 2) + Math.pow(p3.y - p1.y, 2));
+        } else if ((a == 'x' || b == 'x') && (a == 'z' || b == 'z')) {
+            p1_2 = (float) Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.z - p2.z, 2));
+            p2_3 = (float) Math.sqrt(Math.pow(p2.x - p3.x, 2) + Math.pow(p2.z - p3.z, 2));
+            p3_1 = (float) Math.sqrt(Math.pow(p3.x - p1.x, 2) + Math.pow(p3.z - p1.z, 2));
+        } else if ((a == 'y' || b == 'y') && (a == 'z' || b == 'z')) {
+            p1_2 = (float) Math.sqrt(Math.pow(p1.y - p2.y, 2) + Math.pow(p1.z - p2.z, 2));
+            p2_3 = (float) Math.sqrt(Math.pow(p2.y - p3.y, 2) + Math.pow(p2.z - p3.z, 2));
+            p3_1 = (float) Math.sqrt(Math.pow(p3.y - p1.y, 2) + Math.pow(p3.z - p1.z, 2));
+        }
+        float radian = (float) Math.acos((p1_2 * p1_2 + p2_3 * p2_3 - p3_1 * p3_1) / (2 * p1_2 * p2_3));
+        float degree = (float) (radian / Math.PI * 180);
+        return degree;
+    }
 
+    @Override
+    public void onBackPressed() {
+        long tempTime = System.currentTimeMillis();
+        long intervalTime = tempTime - presstime;
+
+        if (0 <= intervalTime && finishtimeed >= intervalTime)
+        {
+            ui_HandlerCheck = true;
+            Intent intent = new Intent(getApplicationContext(), DescriptionActivity.class);
+            startActivity(intent);	//intent 에 명시된 액티비티로 이동
+            finish();
+        }
+        else
+        {
+            presstime = tempTime;
+            Toast.makeText(getApplicationContext(), "한 번 더 누르면 뒤로 갑니다", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    //pose
     protected int getContentViewLayoutResId() {
         return R.layout.activity_measure;
     }
@@ -565,135 +718,5 @@ public class MeasureActivity extends AppCompatActivity {
             ++landmarkIndex;
         }
         return poseLandmarkStr;
-    }
-
-    public static float getLandmarksAngleTwo(markPoint p1, markPoint p2, markPoint p3, char a, char b) {
-        float p1_2 = 0f, p2_3 = 0f, p3_1 = 0f;
-        if (a == b) {
-            return 0;
-        } else if ((a == 'x' || b == 'x') && (a == 'y' || b == 'y')) {
-            p1_2 = (float) Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
-            p2_3 = (float) Math.sqrt(Math.pow(p2.x - p3.x, 2) + Math.pow(p2.y - p3.y, 2));
-            p3_1 = (float) Math.sqrt(Math.pow(p3.x - p1.x, 2) + Math.pow(p3.y - p1.y, 2));
-        } else if ((a == 'x' || b == 'x') && (a == 'z' || b == 'z')) {
-            p1_2 = (float) Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.z - p2.z, 2));
-            p2_3 = (float) Math.sqrt(Math.pow(p2.x - p3.x, 2) + Math.pow(p2.z - p3.z, 2));
-            p3_1 = (float) Math.sqrt(Math.pow(p3.x - p1.x, 2) + Math.pow(p3.z - p1.z, 2));
-        } else if ((a == 'y' || b == 'y') && (a == 'z' || b == 'z')) {
-            p1_2 = (float) Math.sqrt(Math.pow(p1.y - p2.y, 2) + Math.pow(p1.z - p2.z, 2));
-            p2_3 = (float) Math.sqrt(Math.pow(p2.y - p3.y, 2) + Math.pow(p2.z - p3.z, 2));
-            p3_1 = (float) Math.sqrt(Math.pow(p3.y - p1.y, 2) + Math.pow(p3.z - p1.z, 2));
-        }
-        float radian = (float) Math.acos((p1_2 * p1_2 + p2_3 * p2_3 - p3_1 * p3_1) / (2 * p1_2 * p2_3));
-        float degree = (float) (radian / Math.PI * 180);
-        return degree;
-    }
-
-    @Override
-    public void onBackPressed() {
-        long tempTime = System.currentTimeMillis();
-        long intervalTime = tempTime - presstime;
-
-        if (0 <= intervalTime && finishtimeed >= intervalTime)
-        {
-            ui_HandlerCheck = true;
-            Intent intent = new Intent(getApplicationContext(), DescriptionActivity.class);
-            startActivity(intent);	//intent 에 명시된 액티비티로 이동
-            finish();
-        }
-        else
-        {
-            presstime = tempTime;
-            Toast.makeText(getApplicationContext(), "한 번 더 누르면 뒤로 갑니다", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    TimerTask timerTask = new TimerTask() {
-        @Override
-        public void run() {
-            // 반복실행할 구문
-            globalTime++;
-            if(!pauseTimerCheck) {
-                // 0초 이상이면
-                if (timer_second != 0) {
-                    //1초씩 감소
-                    timer_second--;
-
-                    // 0분 이상이면
-                } else if (timer_minute != 0) {
-                    // 1분 = 60초
-                    timer_second = 60;
-                    timer_second--;
-                    timer_minute--;
-
-                    // 0시간 이상이면
-                } else if (timer_hour != 0) {
-                    // 1시간 = 60분
-                    timer_second = 60;
-                    timer_minute = 60;
-                    timer_second--;
-                    timer_minute--;
-                    timer_hour--;
-                }
-
-                //시, 분, 초가 10이하(한자리수) 라면
-                // 숫자 앞에 0을 붙인다 ( 8 -> 08 )
-                if (timer_second <= 9) {
-                    text_second = "0" + timer_second;
-                } else {
-                    text_second = Integer.toString(timer_second);
-                }
-
-                if (timer_minute <= 9) {
-                    text_minute = "0" + timer_minute;
-                } else {
-                    text_minute = Integer.toString(timer_minute);
-                }
-
-                if (timer_hour <= 9) {
-                    text_hour = "0" + timer_hour;
-                } else {
-                    text_hour = Integer.toString(timer_minute);
-                }
-                nowTime = text_hour + ":" + text_minute + ":" + text_second;
-                if(finalStopCheck == 0) {
-                    tv_TimeCounter.setText(nowTime);
-                }
-                else if(finalStopCheck == 1 || finalStopCheck == 2) {
-                    tv_TimeCounter.setText(timer_second + "초 후 메인화면");
-                }
-            }
-
-            if (timer_hour == 0 && timer_minute == 0 && timer_second == 0) {
-                /*timerTask.cancel();//타이머 종료
-                timer.cancel();//타이머 종료
-                timer.purge();//타이머 종료*/
-                //중간에 잠시 멈추는 건 타이머를 죽이는 게 아니라 타이머를 보기로만 잠시 멈춰두고 다시 시작할 때 시간을 새로 갱신
-                if(finalStopCheck == 0) {
-                    timer_second += 10;
-                    finalStopCheck = 1;
-                }
-            }
-        }
-    };
-    private void startDialog() {
-        //이건 자르던지 바꾸던지 하셈
-        AlertDialog.Builder msgBuilder = new AlertDialog.Builder(MeasureActivity.this)
-                .setTitle("시작 전 준비")
-                .setMessage("하단의 확인 버튼을 누르고 나서 정확히 30초 뒤에 자세 측정이 실행됩니다. 그동안 휴대폰을 적당한 위치에 배치해주시길 바랍니다.")
-                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                        divideTime = UseTimerTimeDB.split(":");
-                        timer_hour = Integer.parseInt(divideTime[0]);
-                        timer_minute = Integer.parseInt(divideTime[1]);
-                        timer_second = Integer.parseInt(divideTime[2]);
-                        totalTime = ((((timer_hour * 60) + timer_minute) * 60) + timer_second) * 1000;
-                        timer.scheduleAtFixedRate(timerTask, 5000, 1000); //Timer 실행
-                    }
-                });
-        AlertDialog msgDlg = msgBuilder.create();
-        msgDlg.show();
     }
 }
