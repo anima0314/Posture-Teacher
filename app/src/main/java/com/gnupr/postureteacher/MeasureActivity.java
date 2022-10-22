@@ -547,7 +547,7 @@ public class MeasureActivity extends AppCompatActivity {
         }
 
         if (OutOfRangeSave[7 + side] == true && OutOfRangeSave[11 + side] == true && OutOfRangeSave[23 + side] == true) { //범위 판별
-            angleCalculationResult(7 + side, 11 + side, 23 + side, 120f, 180f); //130f 180f | 120f 180f | 140f 180f
+            angleCalculationResult(7 + side, 11 + side, 23 + side, 125f, 180f); //130f 180f | 120f 180f | 140f 180f
             //엉덩이-허리-귀
             if (markResult[7 + side][11 + side][23 + side] == true) { //각도 판별
                 iv2.setImageResource(R.drawable.neck_green);
@@ -587,7 +587,7 @@ public class MeasureActivity extends AppCompatActivity {
         if (OutOfRangeSave[7 + side] == true && OutOfRangeSave[11 + side] == true) { //범위 판별
             if (!Double.isNaN(getLandmarksAngleTwo(bodyMarkPoint[33 + side], bodyMarkPoint[7 + side], bodyMarkPoint[11 + side], 'x', 'y'))) {
                 if (getLandmarksAngleTwo(bodyMarkPoint[33 + side], bodyMarkPoint[7 + side], bodyMarkPoint[11 + side], 'x', 'y') >= 80f
-                        && getLandmarksAngleTwo(bodyMarkPoint[33 + side], bodyMarkPoint[7 + side], bodyMarkPoint[11 + side], 'x', 'y') <= 140f)
+                        && getLandmarksAngleTwo(bodyMarkPoint[33 + side], bodyMarkPoint[7 + side], bodyMarkPoint[11 + side], 'x', 'y') <= 130f)
                 { //90f 140f | 80f 160f | 80f 120f | 80f 140f
                     markResult[7 + side][7 + side][11 + side] = true;
                 } else {
@@ -610,7 +610,7 @@ public class MeasureActivity extends AppCompatActivity {
         }
 
         if (OutOfRangeSave[23 + side] == true && OutOfRangeSave[25 + side] == true && OutOfRangeSave[27 + side] == true) { //범위 판별
-            angleCalculationResult(23 + side, 25 + side, 27 + side, 80f, 130f); //90f 120f | 70f 140f
+            angleCalculationResult(23 + side, 25 + side, 27 + side, 70f, 140f); //90f 120f | 70f 140f
             //엉덩이-무릎-발목 무릎각도
             if (markResult[23 + side][25 + side][27 + side] == true) { //각도 판별
                 iv5.setImageResource(R.drawable.knee_green);
