@@ -288,10 +288,18 @@ public class MeasureActivity extends AppCompatActivity {
                 getLandmarksAngleResult(1);
                 //오른쪽
 
+            if(finalStopCheck == 0) {
+                tv_TimeCounter.setText(nowTime);
+            }
+            else if(finalStopCheck == 1 || finalStopCheck == 2) {
+                tv_TimeCounter.setText(timer_second + "초 후 메인화면");
+            }
+
             if(finalStopCheck == 1){
                 saveMeasureRounds();
                 saveMeasureDatas();
             }
+
             if(finalStopCheck == 2 && timer_second <= 0) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
@@ -362,12 +370,6 @@ public class MeasureActivity extends AppCompatActivity {
                     text_hour = Integer.toString(timer_minute);
                 }
                 nowTime = text_hour + ":" + text_minute + ":" + text_second;
-                if(finalStopCheck == 0) {
-                    tv_TimeCounter.setText(nowTime);
-                }
-                else if(finalStopCheck == 1 || finalStopCheck == 2) {
-                    tv_TimeCounter.setText(timer_second + "초 후 메인화면");
-                }
             }
 
             if (timer_hour == 0 && timer_minute == 0 && timer_second == 0) {
