@@ -39,6 +39,9 @@ public class StatsModel {
         this.unstable = unstable;
     }
 
+
+    public StatsModel(){
+    }
     public StatsModel(int id, String time, String percent, String unstable) {
         this.id = id;
         this.time = time;
