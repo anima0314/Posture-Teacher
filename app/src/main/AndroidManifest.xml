@@ -21,12 +21,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PostureTeacher">
         <activity
-            android:name="com.gnupr.postureteacher.LogoActivity"
-            android:theme="@style/SplashTheme"
+            android:name="com.gnupr.postureteacher.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
