@@ -32,8 +32,8 @@
         </activity>
         <activity android:name="com.gnupr.postureteacher.MainActivity" />
         <activity android:name="com.gnupr.postureteacher.MeasureActivity"
-                  android:theme="@style/Theme.MeasureActivity"
-                  android:exported="false" />
+            android:theme="@style/Theme.MeasureActivity"
+            android:exported="false" />
         <activity android:name="com.gnupr.postureteacher.DescriptionActivity" />
         <activity android:name="com.gnupr.postureteacher.StatsActivity" />
     </application>
