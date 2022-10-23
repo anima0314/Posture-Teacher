@@ -33,7 +33,7 @@ public class StatsAdapter extends RecyclerView.Adapter<StatsAdapter.ViewHoler>{
         holder.tv_id.setText("측정 id : " + arrayList.get(pos-position).getId() + "번");
         holder.tv_time.setText("총 측정시간 : "+arrayList.get(pos-position).getTime());
         holder.tv_percent.setText("올바른 자세 비율 : "+arrayList.get(pos-position).getPercent());
-        holder.tv_unstable.setText("자세가 불안정해진 시간 : "+arrayList.get(pos-position).getUnstable());
+        holder.tv_unstable.setText(arrayList.get(pos-position).getUnstable());
 
     }
 

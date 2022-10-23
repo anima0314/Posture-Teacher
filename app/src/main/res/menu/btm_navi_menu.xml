@@ -11,8 +11,8 @@
         android:icon="@drawable/ic_baseline_graph"
         android:title="통계"/>
     <item
-        android:id="@+id/description_fragment"
+        android:id="@+id/setting_fragment"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_book"
-        android:title="도움말"/>
+        android:icon="@drawable/ic_baseline_settings"
+        android:title="설정창"/>
 </menu>
