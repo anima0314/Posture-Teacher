@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.stats_fragment:
                         myStartActivity(StatsActivity.class);
                         break;
-                    case R.id.description_fragment:
-                        myStartActivity(DescriptionActivity.class);
+                    case R.id.setting_fragment:
+                        myStartActivity(SettingActivity.class);
                         break;
                 }
                 return true;

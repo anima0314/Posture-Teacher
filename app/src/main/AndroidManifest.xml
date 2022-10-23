@@ -3,7 +3,6 @@
     package="com.gnupr.postureteacher">
 
     <uses-sdk android:targetSdkVersion="31" />
-
     <!-- For using the camera -->
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -20,10 +19,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PostureTeacher">
+
         <activity
             android:name="com.gnupr.postureteacher.LogoActivity"
-            android:theme="@style/SplashTheme"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,11 +31,15 @@
             </intent-filter>
         </activity>
         <activity android:name="com.gnupr.postureteacher.MainActivity" />
-        <activity android:name="com.gnupr.postureteacher.MeasureActivity"
-            android:theme="@style/Theme.MeasureActivity"
-            android:exported="false" />
+        <activity
+            android:name="com.gnupr.postureteacher.MeasureActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MeasureActivity" />
         <activity android:name="com.gnupr.postureteacher.DescriptionActivity" />
         <activity android:name="com.gnupr.postureteacher.StatsActivity" />
+        <activity android:name="com.gnupr.postureteacher.SettingActivity" />
+        <activity android:name="com.gnupr.postureteacher.LicenseActivity" />
+        <activity android:name="com.gnupr.postureteacher.ProgrammerActivity"/>
     </application>
 
 </manifest>

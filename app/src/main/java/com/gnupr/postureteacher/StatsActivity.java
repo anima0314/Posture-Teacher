@@ -24,13 +24,12 @@ public class StatsActivity extends AppCompatActivity {
     private ArrayList<StatsModel> arrayList;
     private StatsAdapter statsAdapter;
     private RecyclerView recyclerView;
-    private MeasureRoomDatabase db = Room.databaseBuilder(getApplicationContext(),MeasureRoomDatabase.class,"measure_database").build();
-
+    private MeasureRoomDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
-
+        db = MeasureRoomDatabase.getDatabase(this);
         recyclerView = findViewById(R.id.rv_stats);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         arrayList = new ArrayList<>();
@@ -38,9 +37,11 @@ public class StatsActivity extends AppCompatActivity {
         //리사이클러뷰 데이터 입력
         MeasureDatasDAO measureDatasDAO = db.getMeasureDatasDao();
         MeasureRoundsDAO measureRoundsDAO = db.getMeasureRoundsDao();
+
         MeasureRoundsEntity mrentity;
         MeasureDatasEntity mdentity;
         List<MeasureRoundsEntity> mrarray= measureRoundsDAO.getAllData();   //측정데이터 모든 값 가져오기
+        Log.d("db","측정데이터 가져오기");
         int mralen = mrarray.size(); //mrarray의 길이 :반복문에서 시간 지연을 줄이기 위해 넣음
         for(int i=0; i < mralen; i++){
             StatsModel statsModel = new StatsModel();   //입력 개체
@@ -49,35 +50,35 @@ public class StatsActivity extends AppCompatActivity {
             statsModel.setId(mrentity.getMeasureRoundID()); // ex)3
             //총측정시간
             Duration diff = Duration.between( mrentity.getMeasureRoundStartTime(), mrentity.getMeasureRoundEndTime());//총 측정시간 계산
-            statsModel.setTime( diff.toMinutes() + ":" + diff.getSeconds() % 60 ); //분은 그대로 초는 60으로 나눈 나머지 "분:초" 꼴로 ex) 50:55
+            Log.d("db",diff.toMinutes() + ":" + diff.getSeconds() % 60);    //로그
+            statsModel.setTime(diff.toMinutes() + "분 " + diff.getSeconds() % 60 +"초"); //분은 그대로 초는 60으로 나눈 나머지 "분:초" 꼴로 ex) 50:55
             //올바른 자세 비율
             LocalDateTime mrstrart = mrentity.getMeasureRoundStartTime();    //측정 회차 시작시간
+            Log.d("db","측정시작 시간 : " + mrstrart);
             List<MeasureDatasEntity> mdarray = measureDatasDAO.getTimeData(mrstrart);   //시작시간 기준으로 상세데이터 가져오기
             int totalsec = 0;
             int mdalen = mdarray.size(); //mdarray의 길이 :반복문에서 시간 지연을 줄이기 위해 넣음
+            if(mdalen == 0){// 자세가 불안정해진적 없는 경우
+                statsModel.setPercent("100%"); //ex 50%
+                statsModel.setUnstable("완벽한 자세였습니다."); //분은 그대로 초는 60으로 나눈 나머지 "분:초" 꼴로 ex) 12:55
+                arrayList.add(statsModel);
+                continue;
+            }
             for(int k = 0; k<mdalen; k++){
                 mdentity = mdarray.get(k);
                 Duration diffmde = Duration.between(mdentity.getMeasureDataStartTime(), mdentity.getMeasureDataEndTime() ); //불안정한 자세 시작과 끝 시간
                 totalsec += diffmde.getSeconds();
             }
             float secpercent = ( (float)totalsec/(float)diff.getSeconds() )*100;// (계산 시간 / 총 측정시간)
-            statsModel.setPercent( secpercent +"%"); //ex 50%
+            statsModel.setPercent( String.format("%.2f", secpercent) +"%"); //ex 50%
             //처음자세가 불안정해진 시간
             Duration diffunstart = Duration.between(mrstrart,mdarray.get(0).getMeasureDataStartTime()); // 전체 측정 시작 시간에서부터 처음 자세가 불안정해진 시간까지
-            statsModel.setUnstable(diffunstart.toMinutes() + ":" + diffunstart.getSeconds() / 60 ); //분은 그대로 초는 60으로 나눈 나머지 "분:초" 꼴로 ex) 12:55
+            Log.d("db","처음 자세가 불안정해진시간 : " + mdarray.get(0).getMeasureDataStartTime());
+            statsModel.setUnstable("자세가 불안정해진 시간 : "+diffunstart.toMinutes() + "분 " + diffunstart.getSeconds() % 60 +"초"); //분은 그대로 초는 60으로 나눈 나머지 "분:초" 꼴로 ex) 12:55
             arrayList.add(statsModel);
         }
-        StatsModel stats = new StatsModel(1,"12:00","89%","6:00");
-        arrayList.add(stats);
-        stats = new StatsModel(2,"12:00","89%","6:00");
-        arrayList.add(stats);
-        stats = new StatsModel(3,"12:00","89%","6:00");
-        arrayList.add(stats);
-        Log.d("Stats","add");
         statsAdapter = new StatsAdapter(arrayList);
         recyclerView.setAdapter(statsAdapter);
-        Log.d("Stats","리사이클러뷰?");
-
     }
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
