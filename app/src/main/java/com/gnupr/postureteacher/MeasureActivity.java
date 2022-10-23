@@ -512,7 +512,7 @@ public class MeasureActivity extends AppCompatActivity {
         MeasureDatasTable.setMeasureDataEndTime(MeasureDataEndTime_num);
         MeasureDatasTable.setMeasureRoundStartTimeFK(MeasureRoundStartTimeFK_num);
         MeasureRoomDatabase.getDatabase(getApplicationContext()).getMeasureDatasDao().insert(MeasureDatasTable);
-        //MeasureRoomDatabase.getDatabase(getApplicationContext()).getMeasureRoundsDao().deleteAll(); 이건 삭제
+        //MeasureRoomDatabase.getDatabase(getApplicationContext()).getMeasureDatasDao().deleteAll(); 이건 삭제
 
         Toast.makeText(this, "상세 시간 저장", Toast.LENGTH_SHORT).show();
     }
@@ -761,7 +761,7 @@ public class MeasureActivity extends AppCompatActivity {
         if (0 <= intervalTime && finishtimeed >= intervalTime)
         {
             ui_HandlerCheck = true;
-            Intent intent = new Intent(getApplicationContext(), DescriptionActivity.class);
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);	//intent 에 명시된 액티비티로 이동
             finish();
         }
