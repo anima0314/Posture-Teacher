@@ -20,6 +20,7 @@ import android.util.Size;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -96,7 +97,7 @@ public class MeasureActivity extends AppCompatActivity {
     //전체 시간
     private int globalTime = 0;
     //시작 이후의 시간
-    private int spareTime = 0;
+    private int spareTime = 100;
     //감지 예비 시간
     private int spareTimeMinus = 1;
     //예비 시간 빼는 값
@@ -137,7 +138,7 @@ public class MeasureActivity extends AppCompatActivity {
     LocalDateTime measureDataEnd = LocalDateTime.now();
     //현재 상세 시간
 
-    private String UseTimerTimeDB = "01:00:31";
+    private String UseTimerTimeDB = "01:22:33";
     //템플릿 타이머 시간 (시간:분:초)
     private final long finishtimeed = 2500;
     private long presstime = 0;
@@ -189,13 +190,15 @@ public class MeasureActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentViewLayoutResId());
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
         //tv2 = findViewById(R.id.tv2);
         //tv6 = findViewById(R.id.tv6);
 
         Intent intent = getIntent();
-        int hour = intent.getIntExtra("hour", 1);
-        int min = intent.getIntExtra("minute", 0);
-        Log.d("가져오나",hour+" : " + min);
+        int intentHour = intent.getIntExtra("hour", 1);
+        int intentMinute = intent.getIntExtra("minute", 0);
+        UseTimerTimeDB = intentHour + ":" + intentMinute + ":00";
 
         iv1= findViewById(R.id.imageView3);
         iv2= findViewById(R.id.imageView4);

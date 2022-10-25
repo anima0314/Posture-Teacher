@@ -25,7 +25,7 @@ public class SplashActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_USER);
 
         Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(new splashHandler(), 2000);
+        handler.postDelayed(new splashHandler(), 3500);
     }
 
     private class splashHandler implements Runnable {
