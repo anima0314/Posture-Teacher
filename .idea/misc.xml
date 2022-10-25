@@ -8,14 +8,20 @@
         <entry key="..\:/Posture-Teacher/app/src/main/res/drawable/ic_baseline_graph.xml" value="0.219" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/drawable/ic_baseline_home.xml" value="0.129" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/drawable/ic_baseline_settings.xml" value="0.2685" />
+        <entry key="..\:/Posture-Teacher/app/src/main/res/drawable/ic_baseline_settings_40.xml" value="0.2235" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/drawable/ic_baseline_signal_cellular_alt_24.xml" value="0.129" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/drawable/ic_launcher_background.xml" value="0.129" />
+        <entry key="..\:/Posture-Teacher/app/src/main/res/drawable/measure_camera_bg.xml" value="0.2235" />
+        <entry key="..\:/Posture-Teacher/app/src/main/res/drawable/measure_dropshadow.xml" value="0.2235" />
+        <entry key="..\:/Posture-Teacher/app/src/main/res/drawable/measure_timer_bg.xml" value="0.2235" />
+        <entry key="..\:/Posture-Teacher/app/src/main/res/drawable/measure_waring_bg.xml" value="0.2235" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/layout/activity_descripstion.xml" value="0.11347517730496454" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/layout/activity_license.xml" value="0.2557291666666667" />
-        <entry key="..\:/Posture-Teacher/app/src/main/res/layout/activity_main.xml" value="0.11347517730496454" />
-        <entry key="..\:/Posture-Teacher/app/src/main/res/layout/activity_measure.xml" value="0.33" />
+        <entry key="..\:/Posture-Teacher/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Posture-Teacher/app/src/main/res/layout/activity_measure.xml" value="0.22" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/layout/activity_programmer.xml" value="0.24895833333333334" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/layout/activity_setting.xml" value="0.2557291666666667" />
+        <entry key="..\:/Posture-Teacher/app/src/main/res/layout/activity_splash.xml" value="0.2635416666666667" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/layout/activity_stats.xml" value="0.11347517730496454" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/layout/item_stats.xml" value="0.5" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/layout/library_item.xml" value="0.5" />

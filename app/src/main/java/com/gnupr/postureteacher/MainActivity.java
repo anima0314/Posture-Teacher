@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,16 +19,31 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        TimePicker picker = findViewById(R.id.timePicker);
+        picker.setIs24HourView(true);
+        picker.setHour(1);
+        picker.setMinute(0);
 
         Button imageButton = findViewById(R.id.start_button);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MeasureActivity.class);
+                intent.putExtra("hour",picker.getHour());
+                intent.putExtra("minute",picker.getMinute());
                 startActivity(intent);
+                finish();
             }
         });
+
+        ImageView btset = findViewById(R.id.bt_setting);
+        btset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myStartActivity(SettingActivity.class);
+            }
+        });
+
         //바텀네비게이션
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -37,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.stats_fragment:
                         myStartActivity(StatsActivity.class);
                         break;
-                    case R.id.setting_fragment:
-                        myStartActivity(SettingActivity.class);
+                    case R.id.description_fragment:
+                        myStartActivity(DescriptionActivity.class);
                         break;
                 }
                 return true;

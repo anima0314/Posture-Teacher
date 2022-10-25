@@ -192,6 +192,11 @@ public class MeasureActivity extends AppCompatActivity {
         //tv2 = findViewById(R.id.tv2);
         //tv6 = findViewById(R.id.tv6);
 
+        Intent intent = getIntent();
+        int hour = intent.getIntExtra("hour", 1);
+        int min = intent.getIntExtra("minute", 0);
+        Log.d("가져오나",hour+" : " + min);
+
         iv1= findViewById(R.id.imageView3);
         iv2= findViewById(R.id.imageView4);
         //iv3= findViewById(R.id.imageView5);
