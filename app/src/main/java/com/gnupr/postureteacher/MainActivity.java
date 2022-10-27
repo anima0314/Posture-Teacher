@@ -28,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(picker.getHour() != 0 && picker.getMinute() != 0) {
+                if(picker.getHour() == 0 && picker.getMinute() == 0) { }
+                else{
                     Intent intent = new Intent(getApplicationContext(), MeasureActivity.class);
                     intent.putExtra("hour", picker.getHour());
                     intent.putExtra("minute", picker.getMinute());

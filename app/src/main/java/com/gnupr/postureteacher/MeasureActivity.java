@@ -481,7 +481,6 @@ public class MeasureActivity extends AppCompatActivity {
     }
 
     public void onClickExit(View view) {
-        if(1 <= globalTime) {
             if(20 <= globalTime) {
                 if (finalStopCheck == 0) {
                     saveMeasureRounds();
@@ -495,7 +494,6 @@ public class MeasureActivity extends AppCompatActivity {
             pauseTimerCheck = true;
             ui_HandlerCheck = false;
             finish();
-        }
     }
 
     private void saveMeasureRounds() { //여기가 측정 시간 저장, 전체
