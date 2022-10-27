@@ -323,31 +323,33 @@ public class MeasureActivity extends AppCompatActivity {
                 getLandmarksAngleResult(1);
                 //오른쪽
 
-            if(!pauseTimerCheck) {
-                if (getResultPosture(resultPosture) == 2) {
-                    if (spareTime >= 90) {
-                        if (spareTimeCheck) {
-                            if(tempTime >= 6) {
-                                saveMeasureDatas();
-                                spareTimeCheck = false;
+
+            if(20 <= globalTime) {
+                if (!pauseTimerCheck) {
+                    if (getResultPosture(resultPosture) == 2) {
+                        if (spareTime >= 90) {
+                            if (spareTimeCheck) {
+                                if (tempTime >= 6) {
+                                    saveMeasureDatas();
+                                    spareTimeCheck = false;
+                                } else if (tempTime < 6)
+                                    tempTime++;
                             }
-                            else if(tempTime < 6)
-                                tempTime++;
                         }
-                    }
-                    spareTime = 100;
-                } else if (getResultPosture(resultPosture) == 1){
-                    if (spareTime <= 0) {
-                        if (!spareTimeCheck) {
-                            measureDataStart = LocalDateTime.now();
-                            spareTimeCheck = true;
+                        spareTime = 100;
+                    } else if (getResultPosture(resultPosture) == 1) {
+                        if (spareTime <= 0) {
+                            if (!spareTimeCheck) {
+                                measureDataStart = LocalDateTime.now();
+                                spareTimeCheck = true;
+                            }
                         }
-                    }
-                    if (spareTime > 0) {
-                        spareTime -= spareTimeMinus;
-                    }
-                    if (tempTime > 0) {
-                        tempTime = 0;
+                        if (spareTime > 0) {
+                            spareTime -= spareTimeMinus;
+                        }
+                        if (tempTime > 0) {
+                            tempTime = 0;
+                        }
                     }
                 }
             }
@@ -360,9 +362,11 @@ public class MeasureActivity extends AppCompatActivity {
             }
 
             if(finalStopCheck == 1){
-                saveMeasureRounds();
-                if (spareTimeCheck) {
-                    saveMeasureDatas();
+                if(20 <= globalTime) {
+                    saveMeasureRounds();
+                    if (spareTimeCheck) {
+                        saveMeasureDatas();
+                    }
                 }
             }
 
@@ -414,6 +418,10 @@ public class MeasureActivity extends AppCompatActivity {
                     timer_second--;
                     timer_minute--;
                     timer_hour--;
+                }
+
+                if(globalTime == 20) {
+                    measureRoundStart = LocalDateTime.now();
                 }
 
                 //시, 분, 초가 10이하(한자리수) 라면
@@ -474,10 +482,12 @@ public class MeasureActivity extends AppCompatActivity {
 
     public void onClickExit(View view) {
         if(1 <= globalTime) {
-            if(finalStopCheck == 0) {
-                saveMeasureRounds();
-                if (spareTimeCheck) {
-                    saveMeasureDatas();
+            if(20 <= globalTime) {
+                if (finalStopCheck == 0) {
+                    saveMeasureRounds();
+                    if (spareTimeCheck) {
+                        saveMeasureDatas();
+                    }
                 }
             }
             Intent intent = new Intent(this, MainActivity.class);
@@ -764,10 +774,12 @@ public class MeasureActivity extends AppCompatActivity {
         if (0 <= intervalTime && finishtimeed >= intervalTime)
         {
             if(1 <= globalTime) {
-                if(finalStopCheck == 0) {
-                    saveMeasureRounds();
-                    if (spareTimeCheck) {
-                        saveMeasureDatas();
+                if(20 <= globalTime) {
+                    if (finalStopCheck == 0) {
+                        saveMeasureRounds();
+                        if (spareTimeCheck) {
+                            saveMeasureDatas();
+                        }
                     }
                 }
                 Intent intent = new Intent(this, MainActivity.class);
