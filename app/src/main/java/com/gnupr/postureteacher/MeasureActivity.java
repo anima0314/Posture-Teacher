@@ -194,12 +194,7 @@ public class MeasureActivity extends AppCompatActivity {
 
         //tv2 = findViewById(R.id.tv2);
         //tv6 = findViewById(R.id.tv6);
-
-        Intent intent = getIntent();
-        int intentHour = intent.getIntExtra("hour", 1);
-        int intentMinute = intent.getIntExtra("minute", 0);
-        UseTimerTimeDB = intentHour + ":" + intentMinute + ":00";
-
+        getTimeIntent();
         iv1= findViewById(R.id.imageView3);
         iv2= findViewById(R.id.imageView4);
         //iv3= findViewById(R.id.imageView5);
@@ -780,6 +775,12 @@ public class MeasureActivity extends AppCompatActivity {
         }
     }
 
+    public void getTimeIntent() {
+        Intent intent = getIntent();
+        int intentHour = intent.getIntExtra("hour", 1);
+        int intentMinute = intent.getIntExtra("minute", 0);
+        UseTimerTimeDB = intentHour + ":" + intentMinute + ":00";
+    }
 
     //pose
     protected int getContentViewLayoutResId() {
