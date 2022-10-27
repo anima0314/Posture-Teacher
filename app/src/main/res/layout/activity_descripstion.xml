@@ -51,7 +51,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="100dp"
-                android:text="해당 어플리케이션은 캐나다 산업안전보건센터의 권장사항을 기반으로 제작 됐습니다. \n권장사항의 내용으로는 사진과 같습니다.\n\n1. 팔의 각도는 90에서 120도여야 한다.\n2. 무릎의 각도는 90에서130도여야 한다.\n3. 발목의 각도는 100도에서 120도여야 한다.\n\n이것 외에도 해당 어플리케이션에서는 3가지의 기준을 더 사용하여 사용자의 자세를 판별합니다."
+                android:text="해당 어플리케이션은 캐나다 산업안전보건센터의 권장사항을 기반으로 제작 됐습니다.\n\n권장사항의 내용으로는 사진과 같습니다.\n\n1. 팔의 각도는 90에서 120도여야 한다.\n\n2. 무릎의 각도는 90에서130도여야 한다.\n\n3. 발목의 각도는 100도에서 120도여야 한다.\n\n이것 외에도 해당 어플리케이션에서는 3가지의 기준을 더 사용하여 사용자의 자세를 판별합니다."
                 android:textSize="15dp"/>
 
             <ImageView
@@ -79,7 +79,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="100dp"
-                android:text=" 메인화면에서는 타이머를 설정할 수 있습니다.\n 해당 피커는 각각 시간 : 분이며, 0시간 0분의 경우엔 설정이 불가능합니다.\n\n 만약 시간을 설정했다면 하단의 측정 시작을 누르면 됩니다."
+                android:text=" 메인화면에서는 타이머를 설정할 수 있습니다.\n\n해당 피커는 각각 시간 : 분이며, 0시간 0분의 경우엔 설정이 불가능합니다.\n\n만약 시간을 설정했다면 하단의 측정 시작을 누르면 됩니다."
                 android:textSize="15dp" />
 
             <ImageView
@@ -107,7 +107,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="100dp"
-                android:text=" 1. 어플리케이션을 실행 후, 맨 위의 측정시작 버튼을 눌러주세요.\n 2. 자신의 측면 기준, 앉은 곳에서 조금 떨어진 곳(1.5m~3m)에 핸드폰을 거치해주세요."
+                android:text=" 1. 어플리케이션을 실행 후, 맨 위의 측정시작 버튼을 눌러주세요.\n\n2. 자신의 측면 기준, 앉은 곳에서 조금 떨어진 곳(1.5m~3m)에 핸드폰을 거치해주세요."
                 android:textSize="15dp" />
 
 
@@ -136,7 +136,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="100dp"
-                android:text=" 측정화면에 들어가면 다음과 같은 안내 문구가 나옵니다.\n 확인 버튼을 누른 시점으로부터 30초 뒤에 측정이 시작됩니다.\n 적당한 곳에 거치가 끝났다면 자리에 가서 앉습니다. \n\n 이제 개인적인 일이나 작업을 타이머 시간 동안 진행하면 됩니다.\n 참고로 자세가 삐뚤어졌을 경우, 해당 내용은 DB에 저장됩니다."
+                android:text=" 측정화면에 들어가면 다음과 같은 안내 문구가 나옵니다.\n\n확인 버튼을 누른 시점으로부터 30초 뒤에 측정이 시작됩니다.\n\n적당한 곳에 거치가 끝났다면 자리에 가서 앉습니다. \n\n이제 개인적인 일이나 작업을 타이머 시간 동안 진행하면 됩니다.\n\n참고로 자세가 삐뚤어졌을 경우, 해당 내용은 DB에 저장됩니다."
                 android:textSize="15dp" />
 
             <ImageView
@@ -193,7 +193,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="100dp"
-                android:text=" 해당 부분은 타이머(측정 수치, 측정 복구 수치)로 나뉘어져 있습니다.\n 타이머는 남은 시간을 알려주는 시간이며, 측정 수치는 현재 자세가 정상적으로 유지되고 있는지 알려주는 수치입니다.\n 또한 측정 복구 수치는 자세가 삐뚤어진 게 장기화되었을 경우 다시 복구되기까지의 수치입니다."
+                android:text=" 해당 부분은 타이머(측정 수치, 측정 복구 수치)로 나뉘어져 있습니다.\n\n타이머는 남은 시간을 알려주는 시간이며, 측정 수치는 현재 자세가 정상적으로 유지되고 있는지 알려주는 수치입니다.\n\n또한 측정 복구 수치는 자세가 삐뚤어진 게 장기화되었을 경우 다시 복구되기까지의 수치입니다."
                 android:textSize="15dp" />
 
 
@@ -222,7 +222,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="100dp"
-                android:text=" 해당 부분은 현재 사용자의 자세가 어떠한 상황인지 알려줍니다.\n\n 목, 허리, 엉덩이, 무릎이 측정 대상이며.\n 잘못된 부분이 있으면 적색, 정상적인 부분이면 녹색, 감지 및 예측이 불가능하면 회색으로 표시가 됩니다."
+                android:text=" 해당 부분은 현재 사용자의 자세가 어떠한 상황인지 알려줍니다.\n\n목, 허리, 엉덩이, 무릎이 측정 대상이며.\n\n잘못된 부분이 있으면 적색, 정상적인 부분이면 녹색, 감지 및 예측이 불가능하면 회색으로 표시가 됩니다."
                 android:textSize="15dp" />
 
 
@@ -251,7 +251,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="100dp"
-                android:text=" 하단의 버튼 한 번 혹은 안드로이드의 뒤로가기 버튼을 두 번 누를 경우 DB가 저장된 채로 메인화면으로 돌아가게 됩니다.\n 다만 DB의 경우 처음 준비 시간인 30초 동안은 메인화면으로 돌아가도 DB 저장이 이뤄지지 않습니다."
+                android:text=" 하단의 버튼 한 번 혹은 안드로이드의 뒤로가기 버튼을 두 번 누를 경우 DB가 저장된 채로 메인화면으로 돌아가게 됩니다.\n\n다만 DB의 경우 처음 준비 시간인 30초 동안은 메인화면으로 돌아가도 DB 저장이 이뤄지지 않습니다."
                 android:textSize="15dp" />
 
 
@@ -280,7 +280,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="100dp"
-                android:text=" 통계화면은 자신이 측정한 내용을 종합적으로 분석해서 간단한 통계로 보여줍니다.\n 이를 통해 측정하는 동안 자신이 얼마나 불안정한 자세를 취하고 있었는지를 알아낼 수 있습니다."
+                android:text=" 통계화면은 자신이 측정한 내용을 종합적으로 분석해서 간단한 통계로 보여줍니다.\n\n이를 통해 측정하는 동안 자신이 얼마나 불안정한 자세를 취하고 있었는지를 알아낼 수 있습니다."
                 android:textSize="15dp" />
 
         </LinearLayout>
