@@ -463,7 +463,7 @@ public class MeasureActivity extends AppCompatActivity {
         tv_TimeCounter = findViewById(R.id.TimeCounter);
         AlertDialog.Builder msgBuilder = new AlertDialog.Builder(MeasureActivity.this)
                 .setTitle("시작 전 준비")
-                .setMessage("하단의 확인 버튼을 누르고 나서 정확히 30초 뒤에 자세 측정이 실행됩니다. 그동안 휴대폰을 적당한 위치에 배치해주시길 바랍니다.")
+                .setMessage("하단의 확인 버튼을 누르고 나서 정확히 30초 뒤에 자세 측정 본격적으로 시작됩니다. 그 이전에 종료시 데이터는 저장되지 않습니다. 그동안 휴대폰을 적당한 위치에 배치해주시길 바랍니다.")
                 .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -473,7 +473,7 @@ public class MeasureActivity extends AppCompatActivity {
                         timer_minute = Integer.parseInt(divideTime[1]);
                         timer_second = Integer.parseInt(divideTime[2]);
                         totalTime = ((((timer_hour * 60) + timer_minute) * 60) + timer_second) * 1000;
-                        timer.scheduleAtFixedRate(timerTask, 7000, 1000); //Timer 실행
+                        timer.scheduleAtFixedRate(timerTask, 10000, 1000); //Timer 실행
                     }
                 });
         AlertDialog msgDlg = msgBuilder.create();
@@ -800,7 +800,7 @@ public class MeasureActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int intentHour = intent.getIntExtra("hour", 1);
         int intentMinute = intent.getIntExtra("minute", 0);
-        UseTimerTimeDB = intentHour + ":" + intentMinute + ":00";
+        UseTimerTimeDB = intentHour + ":" + intentMinute + ":20";
     }
 
     //pose

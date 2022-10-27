@@ -28,11 +28,13 @@ public class MainActivity extends AppCompatActivity {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MeasureActivity.class);
-                intent.putExtra("hour",picker.getHour());
-                intent.putExtra("minute",picker.getMinute());
-                startActivity(intent);
-                finish();
+                if(picker.getHour() != 0 && picker.getMinute() != 0) {
+                    Intent intent = new Intent(getApplicationContext(), MeasureActivity.class);
+                    intent.putExtra("hour", picker.getHour());
+                    intent.putExtra("minute", picker.getMinute());
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
