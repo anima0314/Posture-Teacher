@@ -758,19 +758,28 @@ public class MeasureActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        long tempTime = System.currentTimeMillis();
-        long intervalTime = tempTime - presstime;
+        long tempTimeOBP = System.currentTimeMillis();
+        long intervalTime = tempTimeOBP - presstime;
 
         if (0 <= intervalTime && finishtimeed >= intervalTime)
         {
-            ui_HandlerCheck = true;
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);	//intent 에 명시된 액티비티로 이동
-            finish();
+            if(1 <= globalTime) {
+                if(finalStopCheck == 0) {
+                    saveMeasureRounds();
+                    if (spareTimeCheck) {
+                        saveMeasureDatas();
+                    }
+                }
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                pauseTimerCheck = true;
+                ui_HandlerCheck = false;
+                finish();
+            }
         }
         else
         {
-            presstime = tempTime;
+            presstime = tempTimeOBP;
             Toast.makeText(getApplicationContext(), "한 번 더 누르면 뒤로 갑니다", Toast.LENGTH_SHORT).show();
         }
     }
