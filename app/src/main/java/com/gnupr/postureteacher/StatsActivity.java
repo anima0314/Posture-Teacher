@@ -69,7 +69,7 @@ public class StatsActivity extends AppCompatActivity {
                 Duration diffmde = Duration.between(mdentity.getMeasureDataStartTime(), mdentity.getMeasureDataEndTime() ); //불안정한 자세 시작과 끝 시간
                 totalsec += diffmde.getSeconds();
             }
-            float secpercent = ( (float)totalsec/(float)diff.getSeconds() )*100;// (계산 시간 / 총 측정시간)
+            float secpercent = (1 - ( (float)totalsec/(float)diff.getSeconds() ) )   *100;// (계산 시간 / 총 측정시간)
             statsModel.setPercent( String.format("%.2f", secpercent) +"%"); //ex 50%
             //처음자세가 불안정해진 시간
             Duration diffunstart = Duration.between(mrstrart,mdarray.get(0).getMeasureDataStartTime()); // 전체 측정 시작 시간에서부터 처음 자세가 불안정해진 시간까지

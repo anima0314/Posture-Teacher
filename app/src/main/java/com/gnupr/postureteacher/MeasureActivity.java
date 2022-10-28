@@ -328,7 +328,7 @@ public class MeasureActivity extends AppCompatActivity {
                 if (!pauseTimerCheck) {
                     if (getResultPosture(resultPosture) == 2) {
                         if (spareTime >= 90) {
-                            if (spareTimeCheck) {
+                            if (spareTimeCheck && finalStopCheck == 0) {
                                 if (tempTime >= 6) {
                                     Toast.makeText(getApplicationContext(), "자세가 정상입니다.", Toast.LENGTH_SHORT).show();
                                     saveMeasureDatas();
