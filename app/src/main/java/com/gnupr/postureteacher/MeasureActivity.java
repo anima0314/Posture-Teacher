@@ -443,7 +443,7 @@ public class MeasureActivity extends AppCompatActivity {
                 } else {
                     text_hour = Integer.toString(timer_minute);
                 }
-                nowTime = text_hour + ":" + text_minute + ":" + text_second + " (" + spareTime + " / " + tempTime + ")";
+                nowTime = text_hour + ":" + text_minute + ":" + text_second + " (" + spareTime + "% / " + tempTime + "pt)";
             }
 
             if (timer_hour == 0 && timer_minute == 0 && timer_second == 0) {
@@ -463,7 +463,7 @@ public class MeasureActivity extends AppCompatActivity {
         tv_TimeCounter = findViewById(R.id.TimeCounter);
         AlertDialog.Builder msgBuilder = new AlertDialog.Builder(MeasureActivity.this)
                 .setTitle("시작 전 준비")
-                .setMessage("하단의 확인 버튼을 누르고 나서 정확히 30초 뒤에 자세 측정 본격적으로 시작됩니다. 그 이전에 종료시 데이터는 저장되지 않습니다. 그동안 휴대폰을 적당한 위치에 배치해주시길 바랍니다.")
+                .setMessage("하단의 확인 버튼을 누르고 나서 정확히 30초 뒤에 자세 측정을 본격적으로 시작됩니다. 그 이전에 종료시 데이터는 저장되지 않습니다. 그 동안 휴대폰을 적당한 위치에 배치해주시길 바랍니다.")
                 .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
