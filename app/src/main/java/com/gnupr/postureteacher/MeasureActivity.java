@@ -341,7 +341,7 @@ public class MeasureActivity extends AppCompatActivity {
                     } else if (getResultPosture(resultPosture) == 1) {
                         if (spareTime <= 0) {
                             if (!spareTimeCheck) {
-                                Toast.makeText(getApplicationContext(), "자세가 불안정합니다.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "자세가 불안정한 상태입니다.", Toast.LENGTH_SHORT).show();
                                 measureDataStart = LocalDateTime.now();
                                 spareTimeCheck = true;
                             }
