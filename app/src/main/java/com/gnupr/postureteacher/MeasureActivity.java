@@ -330,6 +330,7 @@ public class MeasureActivity extends AppCompatActivity {
                         if (spareTime >= 90) {
                             if (spareTimeCheck) {
                                 if (tempTime >= 6) {
+                                    Toast.makeText(getApplicationContext(), "자세가 정상입니다.", Toast.LENGTH_SHORT).show();
                                     saveMeasureDatas();
                                     spareTimeCheck = false;
                                 } else if (tempTime < 6)
@@ -340,6 +341,7 @@ public class MeasureActivity extends AppCompatActivity {
                     } else if (getResultPosture(resultPosture) == 1) {
                         if (spareTime <= 0) {
                             if (!spareTimeCheck) {
+                                Toast.makeText(getApplicationContext(), "자세가 불안정합니다.", Toast.LENGTH_SHORT).show();
                                 measureDataStart = LocalDateTime.now();
                                 spareTimeCheck = true;
                             }
