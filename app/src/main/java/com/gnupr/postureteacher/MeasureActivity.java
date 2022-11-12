@@ -560,7 +560,7 @@ public class MeasureActivity extends AppCompatActivity {
         }
 
         if (OutOfRangeSave[7 + side] == true && OutOfRangeSave[11 + side] == true && OutOfRangeSave[23 + side] == true) { //범위 판별
-            angleCalculationResult(7 + side, 11 + side, 23 + side, 125f, 180f); //130f 180f | 120f 180f | 140f 180f
+            angleCalculationResult(7 + side, 11 + side, 23 + side, 125f, 175f); //130f 180f | 120f 180f | 140f 180f
             //엉덩이-허리-귀
             if (markResult[7 + side][11 + side][23 + side] == true) { //각도 판별
                 iv2.setImageResource(R.drawable.neck_green);
