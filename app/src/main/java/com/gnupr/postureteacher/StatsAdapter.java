@@ -76,7 +76,6 @@ public class StatsAdapter extends RecyclerView.Adapter<StatsAdapter.ViewHoler>{
                     int pos = arrayList.size()-1;
                     int position = getAdapterPosition() ;
                     if (position != RecyclerView.NO_POSITION) {
-                        // TODO : use pos.
                         Log.d("rcV","측정 id : " + arrayList.get(pos-position).getId() + "번");
                         mListener.onItemClick(v,position);
                     }
