@@ -1,9 +1,11 @@
 package com.gnupr.postureteacher;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +19,17 @@ public class StatsAdapter extends RecyclerView.Adapter<StatsAdapter.ViewHoler>{
     public StatsAdapter(ArrayList<StatsModel> arrayList) {
         this.arrayList = arrayList;
     }
+
+    // 클릭 이벤트하려고 만든 부분
+    public interface OnItemClickListener{
+        void onItemClick(View v,int position);
+    }
+    public StatsAdapter.OnItemClickListener mListener = null;
+
+    public void setOnItemClickListener(StatsAdapter.OnItemClickListener listener){
+        this.mListener = listener;
+    }
+    //
 
     @NonNull
     @Override
@@ -53,6 +66,22 @@ public class StatsAdapter extends RecyclerView.Adapter<StatsAdapter.ViewHoler>{
             this.tv_time = itemView.findViewById(R.id.stats_time);
             this.tv_percent = itemView.findViewById(R.id.stats_percent);
             this.tv_unstable = itemView.findViewById(R.id.stats_unstable);
+            itemClick(itemView);
+        }
+
+        private void itemClick(View itemView){
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = arrayList.size()-1;
+                    int position = getAdapterPosition() ;
+                    if (position != RecyclerView.NO_POSITION) {
+                        // TODO : use pos.
+                        Log.d("rcV","측정 id : " + arrayList.get(pos-position).getId() + "번");
+                        mListener.onItemClick(v,position);
+                    }
+                }
+            });
         }
     }
 }

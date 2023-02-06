@@ -7,7 +7,6 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import com.gnupr.postureteacher.Databases.DaoClass.MeasureDatasDAO;
 import com.gnupr.postureteacher.Databases.DaoClass.MeasureRoundsDAO;
@@ -79,10 +78,22 @@ public class StatsActivity extends AppCompatActivity {
         }
         statsAdapter = new StatsAdapter(arrayList);
         recyclerView.setAdapter(statsAdapter);
+
+        itemClick();
     }
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);	//intent 에 명시된 액티비티로 이동
         finish();
+    }
+
+    private void itemClick(){
+        statsAdapter.setOnItemClickListener((v, position) -> {
+            int pos = arrayList.size()-1;
+            Intent intent = new Intent(this,StatsDetailActivity.class);
+            intent.putExtra("id",arrayList.get(pos-position).getId());//데이터가 역순으로 들어가있어서 역순으로 id를 찾아야함.
+
+            startActivity(intent);
+        });
     }
 }

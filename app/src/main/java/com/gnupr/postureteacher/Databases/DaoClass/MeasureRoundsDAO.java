@@ -5,8 +5,10 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.gnupr.postureteacher.Databases.EntityClass.MeasureDatasEntity;
 import com.gnupr.postureteacher.Databases.EntityClass.MeasureRoundsEntity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Dao
@@ -26,4 +28,8 @@ public interface MeasureRoundsDAO {
 
     @Query("DELETE FROM MeasureRounds")
     void deleteAll();
+
+    //Select id = i Data
+    @Query("SELECT * FROM MeasureRounds WHERE MeasureRoundID = :i")
+    MeasureRoundsEntity getRoundData(int i);
 }

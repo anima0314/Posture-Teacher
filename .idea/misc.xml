@@ -15,7 +15,7 @@
         <entry key="..\:/Posture-Teacher/app/src/main/res/drawable/measure_dropshadow.xml" value="0.2235" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/drawable/measure_timer_bg.xml" value="0.2235" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/drawable/measure_waring_bg.xml" value="0.2235" />
-        <entry key="..\:/Posture-Teacher/app/src/main/res/layout/activity_descripstion.xml" value="0.11347517730496454" />
+        <entry key="..\:/Posture-Teacher/app/src/main/res/layout/activity_descripstion.xml" value="0.33" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/layout/activity_license.xml" value="0.2557291666666667" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/layout/activity_measure.xml" value="0.22" />
@@ -23,6 +23,7 @@
         <entry key="..\:/Posture-Teacher/app/src/main/res/layout/activity_setting.xml" value="0.2557291666666667" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/layout/activity_splash.xml" value="0.2635416666666667" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/layout/activity_stats.xml" value="0.11347517730496454" />
+        <entry key="..\:/Posture-Teacher/app/src/main/res/layout/activity_stats_detail.xml" value="0.1" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/layout/item_stats.xml" value="0.5" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/layout/library_item.xml" value="0.5" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/menu/btm_navi_menu.xml" value="0.1" />
