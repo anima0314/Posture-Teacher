@@ -3,9 +3,9 @@ package com.gnupr.postureteacher;
 public class StatsDetailModel {
 
     private int id;
-    private String time;
-    private String percent;
-    private String unstable;
+    private String first_time;
+    private String end_time;
+    private String total_time;
 
     public String getId() {
         String stid = Integer.toString(id);
@@ -16,38 +16,38 @@ public class StatsDetailModel {
         this.id = id;
     }
 
-    public String getTime() {
-        return time;
+    public String getFirst_time() {
+        return first_time;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setTime(String first_time) {
+        this.first_time = first_time;
     }
 
-    public String getPercent() {
-        return percent;
+    public String getEnd_time() {
+        return end_time;
     }
 
-    public void setPercent(String percent) {
-        this.percent = percent;
+    public void setEnd_time(String end_time) {
+        this.end_time = end_time;
     }
 
-    public String getUnstable() {
-        return unstable;
+    public String getTotal_time() {
+        return total_time;
     }
 
-    public void setUnstable(String unstable) {
-        this.unstable = unstable;
+    public void setTotal_time(String total_time) {
+        this.total_time = total_time;
     }
 
 
     public StatsDetailModel(){
     }
-    public StatsDetailModel(int id, String time, String percent, String unstable) {
+    public StatsDetailModel(int id, String first_time, String end_time, String total_time) {
         this.id = id;
-        this.time = time;
-        this.percent = percent;
-        this.unstable = unstable;
+        this.first_time = first_time;
+        this.end_time = end_time;
+        this.total_time = total_time;
     }
 
 }

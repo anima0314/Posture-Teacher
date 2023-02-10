@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Posture-Teacher/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.129" />
+        <entry key="..\:/Posture-Teacher/app/src/main/res/drawable/ic_baseline_airline_seat_recline_extra_24.xml" value="0.2445" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/drawable/ic_baseline_book.xml" value="0.129" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/drawable/ic_baseline_graph.xml" value="0.219" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/drawable/ic_baseline_home.xml" value="0.129" />
@@ -23,8 +24,9 @@
         <entry key="..\:/Posture-Teacher/app/src/main/res/layout/activity_setting.xml" value="0.2557291666666667" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/layout/activity_splash.xml" value="0.2635416666666667" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/layout/activity_stats.xml" value="0.11347517730496454" />
-        <entry key="..\:/Posture-Teacher/app/src/main/res/layout/activity_stats_detail.xml" value="0.1" />
-        <entry key="..\:/Posture-Teacher/app/src/main/res/layout/item_stats.xml" value="0.5" />
+        <entry key="..\:/Posture-Teacher/app/src/main/res/layout/activity_stats_detail.xml" value="0.23854166666666668" />
+        <entry key="..\:/Posture-Teacher/app/src/main/res/layout/item_stats.xml" value="0.25" />
+        <entry key="..\:/Posture-Teacher/app/src/main/res/layout/item_stats_detail.xml" value="0.25" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/layout/library_item.xml" value="0.5" />
         <entry key="..\:/Posture-Teacher/app/src/main/res/menu/btm_navi_menu.xml" value="0.1" />
         <entry key="..\:/gitProject/Pose-Correct-App/app/src/main/res/layout/activity_main.xml" value="0.2391304347826087" />

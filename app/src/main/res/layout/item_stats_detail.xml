@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".StatsDetailActivity">
-
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <ImageView
             android:id="@+id/stats_cover"
@@ -29,69 +29,61 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_baseline_graph" />
+            app:srcCompat="@drawable/ic_baseline_airline_seat_recline_extra_24" />
 
         <TextView
-            android:id="@+id/stats_id"
+            android:id="@+id/stats_detail_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginBottom="5dp"
             android:fontFamily="sans-serif"
-            android:text="측정 id : 1"
+            android:text="1번째 어긋난자세"
             android:textColor="@color/black"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/stats_time"
+            app:layout_constraintBottom_toTopOf="@+id/stats_first_time"
             app:layout_constraintStart_toEndOf="@+id/stats_cover"
             app:layout_constraintTop_toTopOf="@+id/stats_cover"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/stats_time"
+            android:id="@+id/stats_first_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginBottom="5dp"
             android:fontFamily="sans-serif"
-            android:text="총측정시간: 2:00"
+            android:text="어긋나기 시작한 시간 : 21:00"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/stats_percent"
+            app:layout_constraintBottom_toTopOf="@+id/stats_end_time"
             app:layout_constraintStart_toEndOf="@+id/stats_cover"
-            app:layout_constraintTop_toBottomOf="@+id/stats_id" />
+            app:layout_constraintTop_toBottomOf="@+id/stats_detail_id" />
 
         <TextView
-            android:id="@+id/stats_percent"
+            android:id="@+id/stats_end_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginBottom="5dp"
             android:fontFamily="sans-serif"
-            android:text="올바른 자세 비율: 50%"
+            android:text="자세가 회복된 시간 : 21:30"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/stats_unstable"
+            app:layout_constraintBottom_toTopOf="@+id/stats_total_time"
             app:layout_constraintStart_toEndOf="@+id/stats_cover"
-            app:layout_constraintTop_toBottomOf="@+id/stats_time" />
+            app:layout_constraintTop_toBottomOf="@+id/stats_first_time" />
 
         <TextView
-            android:id="@+id/stats_unstable"
+            android:id="@+id/stats_total_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="5dp"
             android:fontFamily="sans-serif"
-            android:text="자세가 불안정해진 시간 : 1:00"
+            android:text="자세가 불안정한 총 시간 : 0:30"
             android:textColor="@color/black"
             app:layout_constraintStart_toEndOf="@+id/stats_cover"
-            app:layout_constraintTop_toBottomOf="@+id/stats_percent" />
+            app:layout_constraintTop_toBottomOf="@+id/stats_end_time" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_stats_detail"
-        android:layout_width="match_parent"
-        android:layout_height="600dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
