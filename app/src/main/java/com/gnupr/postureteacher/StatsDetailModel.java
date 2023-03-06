@@ -20,7 +20,7 @@ public class StatsDetailModel {
         return first_time;
     }
 
-    public void setTime(String first_time) {
+    public void setFirst_time(String first_time) {
         this.first_time = first_time;
     }
 
