@@ -53,7 +53,7 @@ public class StatsActivity extends AppCompatActivity {
             statsModel.setTime(diff.toMinutes() + "분 " + diff.getSeconds() % 60 +"초"); //분은 그대로 초는 60으로 나눈 나머지 "분:초" 꼴로 ex) 50:55
             //올바른 자세 비율
             LocalDateTime mrstrart = mrentity.getMeasureRoundStartTime();    //측정 회차 시작시간
-            Log.d("db","측정시작 시간 : " + mrstrart);
+            //Log.d("db","측정시작 시간 : " + mrstrart);
             List<MeasureDatasEntity> mdarray = measureDatasDAO.getTimeData(mrstrart);   //시작시간 기준으로 상세데이터 가져오기
             int totalsec = 0;
             int mdalen = mdarray.size(); //mdarray의 길이 :반복문에서 시간 지연을 줄이기 위해 넣음
@@ -73,7 +73,7 @@ public class StatsActivity extends AppCompatActivity {
             //처음자세가 불안정해진 시간
             Duration diffunstart = Duration.between(mrstrart,mdarray.get(0).getMeasureDataStartTime()); // 전체 측정 시작 시간에서부터 처음 자세가 불안정해진 시간까지
             Log.d("db","처음 자세가 불안정해진시간 : " + mdarray.get(0).getMeasureDataStartTime());
-            statsModel.setUnstable("자세가 불안정해진 시간 : "+diffunstart.toMinutes() + "분 " + diffunstart.getSeconds() % 60 +"초"); //분은 그대로 초는 60으로 나눈 나머지 "분:초" 꼴로 ex) 12:55
+            statsModel.setUnstable("처음 자세가 불안정해진 시간 : "+diffunstart.toMinutes() + "분 " + diffunstart.getSeconds() % 60 +"초"); //분은 그대로 초는 60으로 나눈 나머지 "분:초" 꼴로 ex) 12:55
             arrayList.add(statsModel);
         }
         statsAdapter = new StatsAdapter(arrayList);
@@ -92,7 +92,9 @@ public class StatsActivity extends AppCompatActivity {
             int pos = arrayList.size()-1;
             Intent intent = new Intent(this,StatsDetailActivity.class);
             intent.putExtra("id",arrayList.get(pos-position).getId());//데이터가 역순으로 들어가있어서 역순으로 id를 찾아야함.
-
+            intent.putExtra("time",arrayList.get(pos-position).getTime());
+            intent.putExtra("percent",arrayList.get(pos-position).getPercent());
+            intent.putExtra("unstable",arrayList.get(pos-position).getUnstable());
             startActivity(intent);
         });
     }

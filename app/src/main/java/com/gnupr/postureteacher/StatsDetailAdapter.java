@@ -21,10 +21,10 @@ public class StatsDetailAdapter extends RecyclerView.Adapter<StatsDetailAdapter.
 
     @NonNull
     @Override
-    public StatsDetailAdapter.ViewHoler onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHoler onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_stats_detail,parent,false);
-        StatsDetailAdapter.ViewHoler holder = new StatsDetailAdapter.ViewHoler(view);
+        ViewHoler holder = new ViewHoler(view);
         return holder;
     }
 
@@ -33,7 +33,7 @@ public class StatsDetailAdapter extends RecyclerView.Adapter<StatsDetailAdapter.
         holder.tv_id.setText(arrayList.get(position).getId() + "번째 어긋난자세");
         holder.tv_first_time.setText("어긋나기 시작한 시간 : "+arrayList.get(position).getFirst_time());
         holder.tv_end_time.setText("자세가 회복된 시간 : "+arrayList.get(position).getEnd_time());
-        holder.tv_total_time.setText("자세가 불안정한 총시간 : "+arrayList.get(position).getTotal_time());
+        holder.tv_total_time.setText("자세가 불안정한 시간 : "+arrayList.get(position).getTotal_time());
     }
 
     @Override
@@ -47,7 +47,7 @@ public class StatsDetailAdapter extends RecyclerView.Adapter<StatsDetailAdapter.
 
         public ViewHoler(@NonNull View itemView) {
             super(itemView);
-            this.tv_id = itemView.findViewById(R.id.stats_id);
+            this.tv_id = itemView.findViewById(R.id.stats_detail_id);
             this.tv_first_time = itemView.findViewById(R.id.stats_first_time);
             this.tv_end_time = itemView.findViewById(R.id.stats_end_time);
             this.tv_total_time = itemView.findViewById(R.id.stats_total_time);
