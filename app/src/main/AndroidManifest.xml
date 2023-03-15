@@ -33,6 +33,10 @@
             android:name="com.gnupr.postureteacher.MeasureActivity"
             android:exported="false"
             android:theme="@style/Theme.MeasureActivity" />
+        <activity
+            android:name="com.gnupr.postureteacher.PlankActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MeasureActivity" />
         <activity android:name="com.gnupr.postureteacher.DescriptionActivity" />
         <activity android:name="com.gnupr.postureteacher.StatsActivity" />
         <activity android:name="com.gnupr.postureteacher.SettingActivity" />

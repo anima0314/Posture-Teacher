@@ -12,17 +12,21 @@ import androidx.room.TypeConverters;
 import com.gnupr.postureteacher.Databases.Converters.DateConverters;
 import com.gnupr.postureteacher.Databases.DaoClass.MeasureDatasDAO;
 import com.gnupr.postureteacher.Databases.DaoClass.MeasureRoundsDAO;
+import com.gnupr.postureteacher.Databases.EntityClass.Measure2DatasEntity;
+import com.gnupr.postureteacher.Databases.EntityClass.Measure2RoundsEntity;
 import com.gnupr.postureteacher.Databases.EntityClass.MeasureDatasEntity;
 import com.gnupr.postureteacher.Databases.EntityClass.MeasureRoundsEntity;
 
 
 
-@Database(entities = {MeasureDatasEntity.class, MeasureRoundsEntity.class}, version = 1, exportSchema = false)
+@Database(entities = {MeasureDatasEntity.class, MeasureRoundsEntity.class, Measure2DatasEntity.class, Measure2RoundsEntity.class}, version = 1, exportSchema = false)
 @TypeConverters({DateConverters.class})
 public abstract class MeasureRoomDatabase extends RoomDatabase {
 
     public abstract MeasureDatasDAO getMeasureDatasDao();
     public abstract MeasureRoundsDAO getMeasureRoundsDao();
+    public abstract MeasureDatasDAO getMeasure2DatasDao();
+    public abstract MeasureRoundsDAO getMeasure2RoundsDao();
     public static final int NUMBER_OF_THREADS = 4;
     private static volatile MeasureRoomDatabase INSTANCE;
     public static final ExecutorService databaseWriteExecutor
