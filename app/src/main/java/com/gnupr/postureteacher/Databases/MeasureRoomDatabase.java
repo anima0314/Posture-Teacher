@@ -10,6 +10,8 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
 import com.gnupr.postureteacher.Databases.Converters.DateConverters;
+import com.gnupr.postureteacher.Databases.DaoClass.Measure2DatasDAO;
+import com.gnupr.postureteacher.Databases.DaoClass.Measure2RoundsDAO;
 import com.gnupr.postureteacher.Databases.DaoClass.MeasureDatasDAO;
 import com.gnupr.postureteacher.Databases.DaoClass.MeasureRoundsDAO;
 import com.gnupr.postureteacher.Databases.EntityClass.Measure2DatasEntity;
@@ -25,8 +27,8 @@ public abstract class MeasureRoomDatabase extends RoomDatabase {
 
     public abstract MeasureDatasDAO getMeasureDatasDao();
     public abstract MeasureRoundsDAO getMeasureRoundsDao();
-    public abstract MeasureDatasDAO getMeasure2DatasDao();
-    public abstract MeasureRoundsDAO getMeasure2RoundsDao();
+    public abstract Measure2DatasDAO getMeasure2DatasDao();
+    public abstract Measure2RoundsDAO getMeasure2RoundsDao();
     public static final int NUMBER_OF_THREADS = 4;
     private static volatile MeasureRoomDatabase INSTANCE;
     public static final ExecutorService databaseWriteExecutor
