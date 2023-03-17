@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(picker.getHour() == 0 && picker.getMinute() == 0) { }
                 else{
-                    Intent intent = new Intent(getApplicationContext(), MeasureActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), PlankActivity.class);
                     intent.putExtra("hour", picker.getHour());
                     intent.putExtra("minute", picker.getMinute());
                     startActivity(intent);
