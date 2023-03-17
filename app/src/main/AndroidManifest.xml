@@ -19,7 +19,6 @@
         android:roundIcon="@mipmap/icon_main_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PostureTeacher">
-
         <activity
             android:name="com.gnupr.postureteacher.SplashActivity"
             android:exported="true">
@@ -39,9 +38,11 @@
             android:theme="@style/Theme.MeasureActivity" />
         <activity android:name="com.gnupr.postureteacher.DescriptionActivity" />
         <activity android:name="com.gnupr.postureteacher.StatsActivity" />
+        <activity android:name="com.gnupr.postureteacher.Stats2Activity" />
+        <activity android:name="com.gnupr.postureteacher.StatsDetailActivity" />
         <activity android:name="com.gnupr.postureteacher.SettingActivity" />
         <activity android:name="com.gnupr.postureteacher.LicenseActivity" />
-        <activity android:name="com.gnupr.postureteacher.ProgrammerActivity"/>
+        <activity android:name="com.gnupr.postureteacher.ProgrammerActivity" />
     </application>
 
 </manifest>
