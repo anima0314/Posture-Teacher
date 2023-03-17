@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StatsActivity extends AppCompatActivity {
+public class Stats2Activity extends AppCompatActivity {
     private ArrayList<StatsModel> arrayList;
     private StatsAdapter statsAdapter;
     private RecyclerView recyclerView;
@@ -29,9 +29,9 @@ public class StatsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stats);
+        setContentView(R.layout.activity_stats2);
         db = MeasureRoomDatabase.getDatabase(this);
-        recyclerView = findViewById(R.id.rv_stats1);
+        recyclerView = findViewById(R.id.rv_stats2);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         arrayList = new ArrayList<>();
 
@@ -81,12 +81,11 @@ public class StatsActivity extends AppCompatActivity {
         statsAdapter = new StatsAdapter(arrayList);
         recyclerView.setAdapter(statsAdapter);
 
-
-        Button button = findViewById(R.id.change_button1);
+        Button button = findViewById(R.id.change_button2);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Stats2Activity.class);
+                Intent intent = new Intent(getApplicationContext(), StatsActivity.class);
                 startActivity(intent);
             }
         });
@@ -98,6 +97,7 @@ public class StatsActivity extends AppCompatActivity {
         startActivity(intent);	//intent 에 명시된 액티비티로 이동
         finish();
     }
+
     private void itemClick(){
         statsAdapter.setOnItemClickListener((v, position) -> {
             int pos = arrayList.size()-1;
@@ -108,11 +108,5 @@ public class StatsActivity extends AppCompatActivity {
             intent.putExtra("unstable",arrayList.get(pos-position).getUnstable());
             startActivity(intent);
         });
-    }
-    //화면전환 메소드
-    private void myStartActivity(Class c) {
-        Intent intent = new Intent(this, c);
-        startActivity(intent);
-        finish();
     }
 }

@@ -5,20 +5,20 @@
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_stats1"
+        android:id="@+id/rv_stats2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/change_button1"
+        app:layout_constraintBottom_toTopOf="@+id/change_button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/change_button1"
+        android:id="@+id/change_button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="앉은 자세"
+        android:text="플랭크 자세"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
