@@ -21,7 +21,7 @@ import com.gnupr.postureteacher.Databases.EntityClass.MeasureRoundsEntity;
 
 
 
-@Database(entities = {MeasureDatasEntity.class, MeasureRoundsEntity.class, Measure2DatasEntity.class, Measure2RoundsEntity.class}, version = 1, exportSchema = false)
+@Database(version = 1,entities = {MeasureDatasEntity.class, MeasureRoundsEntity.class, Measure2DatasEntity.class, Measure2RoundsEntity.class}, exportSchema = false)
 @TypeConverters({DateConverters.class})
 public abstract class MeasureRoomDatabase extends RoomDatabase {
 
