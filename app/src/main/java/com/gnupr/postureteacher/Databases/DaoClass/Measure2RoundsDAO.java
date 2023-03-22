@@ -6,6 +6,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.gnupr.postureteacher.Databases.EntityClass.Measure2RoundsEntity;
+import com.gnupr.postureteacher.Databases.EntityClass.MeasureRoundsEntity;
 
 import java.util.List;
 
@@ -26,4 +27,8 @@ public interface Measure2RoundsDAO {
 
     @Query("DELETE FROM Measure2Rounds")
     void deleteAll();
+
+    //Select id = i Data
+    @Query("SELECT * FROM Measure2Rounds WHERE Measure2RoundID = :i")
+    Measure2RoundsEntity getRoundData(int i);
 }
