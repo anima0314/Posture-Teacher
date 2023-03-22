@@ -11,12 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gnupr.postureteacher.Databases.DaoClass.Measure2DatasDAO;
 import com.gnupr.postureteacher.Databases.DaoClass.Measure2RoundsDAO;
-import com.gnupr.postureteacher.Databases.DaoClass.MeasureDatasDAO;
-import com.gnupr.postureteacher.Databases.DaoClass.MeasureRoundsDAO;
 import com.gnupr.postureteacher.Databases.EntityClass.Measure2DatasEntity;
 import com.gnupr.postureteacher.Databases.EntityClass.Measure2RoundsEntity;
-import com.gnupr.postureteacher.Databases.EntityClass.MeasureDatasEntity;
-import com.gnupr.postureteacher.Databases.EntityClass.MeasureRoundsEntity;
 import com.gnupr.postureteacher.Databases.MeasureRoomDatabase;
 
 import java.time.Duration;
