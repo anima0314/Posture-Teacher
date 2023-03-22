@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                 if(picker.getHour() == 0 && picker.getMinute() == 0) { }
                 else{
                     Intent intent;
-                    if(switchButtonCheck==0) {
+                    if(switchButtonCheck==1) {
                         intent = new Intent(getApplicationContext(), PlankActivity.class);
                     }
                     else {
@@ -64,10 +64,10 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if (isChecked) {
                     switchButtonCheck = 0;
-                    tvSwitch.setText("플랭크 측정 모드");
+                    tvSwitch.setText("앉은 자세 측정 모드");
                 } else {
                     switchButtonCheck = 1;
-                    tvSwitch.setText("앉은 자세 측정 모드");
+                    tvSwitch.setText("플랭크 측정 모드");
                 }
             }
         });
