@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="110dp"
         android:layout_marginBottom="516dp"
-        android:size="22dp"
+        android:textSize="18dp"
         android:text="플랭크 모드"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
