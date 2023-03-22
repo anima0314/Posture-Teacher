@@ -10,4 +10,6 @@
     <color name="black">#FF32383E</color>
     <color name="gray">#FF616161</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="switch_thumb_color">#FF616161</color>
+    <color name="switch_track_color">#FF32383E</color>
 </resources>

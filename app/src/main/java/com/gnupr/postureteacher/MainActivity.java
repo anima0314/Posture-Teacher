@@ -18,13 +18,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-    int switchButtonCheck = 0;
+    int switchButtonCheck = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TimePicker picker = findViewById(R.id.timePicker);
         TextView tvSwitch = findViewById(R.id.SwitchText);
+        tvSwitch.setText("앉은 자세 측정 모드");
         picker.setIs24HourView(true);
         picker.setHour(1);
         picker.setMinute(0);
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 if(picker.getHour() == 0 && picker.getMinute() == 0) { }
                 else{
                     Intent intent;
-                    if(switchButtonCheck==1) {
+                    if(switchButtonCheck==0) {
                         intent = new Intent(getApplicationContext(), PlankActivity.class);
                     }
                     else {
@@ -64,10 +65,10 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if (isChecked) {
                     switchButtonCheck = 0;
-                    tvSwitch.setText("앉은 자세 측정 모드");
+                    tvSwitch.setText("플랭크 측정 모드");
                 } else {
                     switchButtonCheck = 1;
-                    tvSwitch.setText("플랭크 측정 모드");
+                    tvSwitch.setText("앉은 자세 측정 모드");
                 }
             }
         });
