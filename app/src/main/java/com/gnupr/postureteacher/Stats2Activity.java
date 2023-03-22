@@ -101,7 +101,7 @@ public class Stats2Activity extends AppCompatActivity {
     private void itemClick(){
         statsAdapter.setOnItemClickListener((v, position) -> {
             int pos = arrayList.size()-1;
-            Intent intent = new Intent(this,StatsDetailActivity.class);
+            Intent intent = new Intent(this,Stats2DetailActivity.class);
             intent.putExtra("id",arrayList.get(pos-position).getId());//데이터가 역순으로 들어가있어서 역순으로 id를 찾아야함.
             intent.putExtra("time",arrayList.get(pos-position).getTime());
             intent.putExtra("percent",arrayList.get(pos-position).getPercent());

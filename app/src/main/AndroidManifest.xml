@@ -40,6 +40,7 @@
         <activity android:name="com.gnupr.postureteacher.StatsActivity" />
         <activity android:name="com.gnupr.postureteacher.Stats2Activity" />
         <activity android:name="com.gnupr.postureteacher.StatsDetailActivity" />
+        <activity android:name="com.gnupr.postureteacher.Stats2DetailActivity" />
         <activity android:name="com.gnupr.postureteacher.SettingActivity" />
         <activity android:name="com.gnupr.postureteacher.LicenseActivity" />
         <activity android:name="com.gnupr.postureteacher.ProgrammerActivity" />
