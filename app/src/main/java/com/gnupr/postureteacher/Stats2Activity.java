@@ -87,6 +87,7 @@ public class Stats2Activity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), StatsActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -107,6 +108,7 @@ public class Stats2Activity extends AppCompatActivity {
             intent.putExtra("percent",arrayList.get(pos-position).getPercent());
             intent.putExtra("unstable",arrayList.get(pos-position).getUnstable());
             startActivity(intent);
+            finish();
         });
     }
 }

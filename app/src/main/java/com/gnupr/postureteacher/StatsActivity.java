@@ -88,6 +88,7 @@ public class StatsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Stats2Activity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -107,12 +108,7 @@ public class StatsActivity extends AppCompatActivity {
             intent.putExtra("percent",arrayList.get(pos-position).getPercent());
             intent.putExtra("unstable",arrayList.get(pos-position).getUnstable());
             startActivity(intent);
+            finish();
         });
-    }
-    //화면전환 메소드
-    private void myStartActivity(Class c) {
-        Intent intent = new Intent(this, c);
-        startActivity(intent);
-        finish();
     }
 }
