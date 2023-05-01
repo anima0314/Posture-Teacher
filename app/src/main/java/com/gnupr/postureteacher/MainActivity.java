@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -29,7 +30,9 @@ public class MainActivity extends AppCompatActivity {
         picker.setIs24HourView(true);
         picker.setHour(1);
         picker.setMinute(0);
-
+        EditText time= findViewById(R.id.editTextNumber);
+        time.setText("1");
+        time.setEnabled(false);
         Button imageButton = findViewById(R.id.start_button);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else {
                         intent = new Intent(getApplicationContext(), MeasureActivity.class);
+                    }
+                    if(time.getText()==null){
+                        intent.putExtra("times","1");
+                    }
+                    else{
+                        intent.putExtra("times",time.getText());
                     }
                     intent.putExtra("hour", picker.getHour());
                     intent.putExtra("minute", picker.getMinute());
@@ -66,9 +75,13 @@ public class MainActivity extends AppCompatActivity {
                 if (isChecked) {
                     switchButtonCheck = 0;
                     tvSwitch.setText("플랭크 측정 모드");
+                    time.setText(null);
+                    time.setEnabled(true);
                 } else {
                     switchButtonCheck = 1;
                     tvSwitch.setText("앉은 자세 측정 모드");
+                    time.setText("1");
+                    time.setEnabled(false);
                 }
             }
         });
