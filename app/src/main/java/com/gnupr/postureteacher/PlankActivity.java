@@ -82,9 +82,9 @@ public class PlankActivity extends AppCompatActivity {
     //타이머 다이얼로그 시작 확인
 
 
-    private int timer_hour, timer_minute, timer_second;
+    private int timer_minute, timer_second;
     //글로벌 시간
-    private String text_hour, text_minute, text_second;
+    private String text_minute, text_second;
     //텍스트 상의 시간
     private String nowTime;
     //지금 시간
@@ -112,13 +112,17 @@ public class PlankActivity extends AppCompatActivity {
     //현재 상세 시간
     private boolean timeRoundCheck = true;
     //상세 시간 측정해도 되는지
+    private int plankBreakTime = 20;
+    //쉬는 시간 초수
 
 
     private String[] divideTime;
     //문자열에서 분할된 시간
     private Timer timer = new Timer();
     private boolean pauseTimerCheck = false;
-    //false = 흘러감, true = 멈춤
+    //타이머 정지, false = 흘러감, true = 멈춤
+    private boolean breakTimeCheck = false;
+    //쉬는 시간 여부, false = 쉬는 시간 아님, true = 쉬는 시간임
 
     LocalDate nowLocalDate = LocalDate.now();
     LocalTime nowLocalTime = LocalTime.now();
@@ -133,14 +137,14 @@ public class PlankActivity extends AppCompatActivity {
     LocalDateTime measure2DataEnd = LocalDateTime.now();
     //현재 상세 시간
 
-    private String UseTimerTimeDB = "01:22:33";
+    private String UseTimerTimeDB = "11:22";
     //템플릿 타이머 시간 (시간:분:초)
     private final long finishtimeed = 2500;
     private long presstime = 0;
 
-    private int plankTargetCount = 0;
+    private int plankTargetCount = 1;
     //플랭크할 횟수
-    private int plankCurrentCount = 0;
+    private int plankCurrentCount = 1;
     //현재 플랭크 횟수
 
     private int finalStopCheck = 0;
@@ -325,7 +329,7 @@ public class PlankActivity extends AppCompatActivity {
 
 
             if(20 <= globalTime) {
-                if (!pauseTimerCheck) {
+                if (!pauseTimerCheck && !breakTimeCheck) {
                     if (getResultPosture(resultPosture) == 2) {
                         if (spareTime >= 90) {
                             if (spareTimeCheck && finalStopCheck == 0) {
@@ -354,7 +358,7 @@ public class PlankActivity extends AppCompatActivity {
                         }
                     }
                 }
-                else if (pauseTimerCheck && finalStopCheck == 1) {
+                else if (breakTimeCheck && finalStopCheck == 1) {
                     if(spareTime <= 0) {
                         saveMeasure2Datas();
                         spareTime = 100;
@@ -368,7 +372,7 @@ public class PlankActivity extends AppCompatActivity {
                 tv_TimeCounter.setText(nowTime);
             }
             else if(finalStopCheck == 1) {
-                tv_TimeCounter.setText(timer_second + "초 간 쉬는 시간");
+                tv_TimeCounter.setText(timer_second + "초 간 쉬기\n("  + plankCurrentCount + "/" + plankTargetCount + "세트)");
             }
             else if(finalStopCheck == 2 || finalStopCheck == 3) {
                 tv_TimeCounter.setText(timer_second + "초 후 메인화면");
@@ -422,15 +426,6 @@ public class PlankActivity extends AppCompatActivity {
                     timer_second = 60;
                     timer_second--;
                     timer_minute--;
-
-                    // 0시간 이상이면
-                } else if (timer_hour != 0) {
-                    // 1시간 = 60분
-                    timer_second = 60;
-                    timer_minute = 60;
-                    timer_second--;
-                    timer_minute--;
-                    timer_hour--;
                 }
 
                 if(globalTime == 20) {
@@ -451,37 +446,30 @@ public class PlankActivity extends AppCompatActivity {
                     text_minute = Integer.toString(timer_minute);
                 }
 
-                if (timer_hour <= 9) {
-                    text_hour = "0" + timer_hour;
-                } else {
-                    text_hour = Integer.toString(timer_minute);
-                }
-                nowTime = text_hour + ":" + text_minute + ":" + text_second + "\n(" + spareTime + "% / " + tempTime + "pt)";
+                nowTime = text_minute + ":" + text_second + " | " + plankCurrentCount + "/" + plankTargetCount + "세트\n(" + spareTime + "% / " + tempTime + "pt)";
             }
 
-            if (timer_hour == 0 && timer_minute == 0 && timer_second == 0) {
+            if (timer_minute == 0 && timer_second == 0) {
                 /*timerTask.cancel();//타이머 종료
                 timer.cancel();//타이머 종료
                 timer.purge();//타이머 종료*/
                 //중간에 잠시 멈추는 건 타이머를 죽이는 게 아니라 타이머를 보기로만 잠시 멈춰두고 다시 시작할 때 시간을 새로 갱신
                 if(finalStopCheck == 0) {
-                    timer_second += 20;
+                    timer_second += plankBreakTime;
                     //플랭크 쉬는 시간 설정
                     finalStopCheck = 1;
-                    pauseTimerCheck = true;
+                    breakTimeCheck = true;
                 }
                 else if(finalStopCheck == 1) {
-                    if (plankTargetCount == plankCurrentCount)
-                    {
+                    if (plankTargetCount <= plankCurrentCount) {
                         timer_second += 3;
                         finalStopCheck = 2;
                     }
                     else {
-                        timer_hour = Integer.parseInt(divideTime[0]);
-                        timer_minute = Integer.parseInt(divideTime[1]);
-                        timer_second = Integer.parseInt(divideTime[2]);
+                        timer_minute = Integer.parseInt(divideTime[0]);
+                        timer_second = Integer.parseInt(divideTime[1]);
                         plankCurrentCount++;
-                        pauseTimerCheck = false;
+                        breakTimeCheck = false;
                         finalStopCheck = 0;
                     }
                 }
@@ -499,10 +487,9 @@ public class PlankActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         divideTime = UseTimerTimeDB.split(":");
-                        timer_hour = Integer.parseInt(divideTime[0]);
-                        timer_minute = Integer.parseInt(divideTime[1]);
-                        timer_second = Integer.parseInt(divideTime[2]);
-                        totalTime = ((((timer_hour * 60) + timer_minute) * 60) + timer_second) * 1000;
+                        timer_minute = Integer.parseInt(divideTime[0]);
+                        timer_second = Integer.parseInt(divideTime[1] + 20);
+                        totalTime = ((timer_minute * 60) + timer_second) * 1000;
                         timer.scheduleAtFixedRate(timerTask, 10000, 1000); //Timer 실행
                     }
                 });
@@ -551,11 +538,13 @@ public class PlankActivity extends AppCompatActivity {
         measure2DataEnd = LocalDateTime.now();
         LocalDateTime Measure2DataEndTime_num = measure2DataEnd;
         LocalDateTime Measure2RoundStartTimeFK_num = measure2RoundStart;
+        int detectCurrentCount = plankCurrentCount;
 
         Measure2DatasEntity Measure2DatasTable = new Measure2DatasEntity();
         Measure2DatasTable.setMeasure2DataStartTime(Measure2DataStartTime_num);
         Measure2DatasTable.setMeasure2DataEndTime(Measure2DataEndTime_num);
         Measure2DatasTable.setMeasure2RoundStartTimeFK(Measure2RoundStartTimeFK_num);
+        Measure2DatasTable.setMeasure2RoundDetectCount(detectCurrentCount);
         MeasureRoomDatabase.getDatabase(getApplicationContext()).getMeasure2DatasDao().insert(Measure2DatasTable);
         //MeasureRoomDatabase.getDatabase(getApplicationContext()).getMeasure2DatasDao().deleteAll(); 이건 삭제
 
@@ -830,9 +819,10 @@ public class PlankActivity extends AppCompatActivity {
 
     public void getTimeIntent() {
         Intent intent = getIntent();
-        int intentHour = intent.getIntExtra("hour", 1);
-        int intentMinute = intent.getIntExtra("minute", 0);
-        UseTimerTimeDB = intentHour + ":" + intentMinute + ":20";
+        int intentMinute = intent.getIntExtra("minute", 1);
+        int intentSecond = intent.getIntExtra("second", 0);
+        UseTimerTimeDB = intentMinute + ":" + intentSecond;
+        plankTargetCount = intent.getIntExtra("count", 2);
     }
 
     //pose

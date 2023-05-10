@@ -30,14 +30,18 @@ public class Measure2DatasEntity {
     @ColumnInfo
     private LocalDateTime Measure2RoundStartTimeFK;
 
+    @ColumnInfo
+    private int Measure2RoundDetectCount;
+
     public Measure2DatasEntity() {
     }
 
-    public Measure2DatasEntity(int DB_Measure2DataID, LocalDateTime DB_Measure2DataStartTime, LocalDateTime DB_Measure2DataEndTime, LocalDateTime DB_Measure2RoundStartTimeFK) {
+    public Measure2DatasEntity(int DB_Measure2DataID, LocalDateTime DB_Measure2DataStartTime, LocalDateTime DB_Measure2DataEndTime, LocalDateTime DB_Measure2RoundStartTimeFK, int DB_Measure2RoundDetectCount) {
         this.Measure2DataID = DB_Measure2DataID;
         this.Measure2DataStartTime = DB_Measure2DataStartTime;
         this.Measure2DataEndTime = DB_Measure2DataEndTime;
         this.Measure2RoundStartTimeFK = DB_Measure2RoundStartTimeFK;
+        this.Measure2RoundDetectCount = DB_Measure2RoundDetectCount;
     }
 
     public int getMeasure2DataID() {
@@ -60,5 +64,10 @@ public class Measure2DatasEntity {
     public LocalDateTime getMeasure2RoundStartTimeFK() { return Measure2RoundStartTimeFK; }
     public void setMeasure2RoundStartTimeFK(LocalDateTime Measure2RoundStartTimeFK) {
         this.Measure2RoundStartTimeFK = Measure2RoundStartTimeFK;
+    }
+
+    public int getMeasure2RoundDetectCount() { return Measure2RoundDetectCount; }
+    public void setMeasure2RoundDetectCount(int Measure2RoundDetectCount) {
+        this.Measure2RoundDetectCount = Measure2RoundDetectCount;
     }
 }
