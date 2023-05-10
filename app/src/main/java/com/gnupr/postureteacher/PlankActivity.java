@@ -138,9 +138,14 @@ public class PlankActivity extends AppCompatActivity {
     private final long finishtimeed = 2500;
     private long presstime = 0;
 
+    private int plankTargetCount = 0;
+    //플랭크할 횟수
+    private int plankCurrentCount = 0;
+    //현재 플랭크 횟수
+
     private int finalStopCheck = 0;
     //완전 종료 대기 확인
-    //0 아무것도 아님, 1 돌입 대기, 2 돌입
+    //0 아무것도 아님, 1 쉬는 시간, 2 돌입 대기, 3 돌입
 
     //private TextView tv2;
     //private TextView tv6;
@@ -349,16 +354,27 @@ public class PlankActivity extends AppCompatActivity {
                         }
                     }
                 }
+                else if (pauseTimerCheck && finalStopCheck == 1) {
+                    if(spareTime <= 0) {
+                        saveMeasure2Datas();
+                        spareTime = 100;
+                        //쉬는 단계에 접어들 때 자세가 흐트러져 있을 경우 spareTime이 0 아래이면 그냥 저장을 해버림
+                        //이미 시간 관련 정보는 다른 곳에서 저장되었기에 별 상관없음
+                    }
+                }
             }
 
             if(finalStopCheck == 0) {
                 tv_TimeCounter.setText(nowTime);
             }
-            else if(finalStopCheck == 1 || finalStopCheck == 2) {
+            else if(finalStopCheck == 1) {
+                tv_TimeCounter.setText(timer_second + "초 간 쉬는 시간");
+            }
+            else if(finalStopCheck == 2 || finalStopCheck == 3) {
                 tv_TimeCounter.setText(timer_second + "초 후 메인화면");
             }
 
-            if(finalStopCheck == 1){
+            if(finalStopCheck == 2){
                 if(20 <= globalTime) {
                     saveMeasure2Rounds();
                     if (spareTimeCheck) {
@@ -367,7 +383,7 @@ public class PlankActivity extends AppCompatActivity {
                 }
             }
 
-            if(finalStopCheck == 2 && timer_second <= 0) {
+            if(finalStopCheck == 3 && timer_second <= 0) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 pauseTimerCheck = true;
@@ -449,8 +465,25 @@ public class PlankActivity extends AppCompatActivity {
                 timer.purge();//타이머 종료*/
                 //중간에 잠시 멈추는 건 타이머를 죽이는 게 아니라 타이머를 보기로만 잠시 멈춰두고 다시 시작할 때 시간을 새로 갱신
                 if(finalStopCheck == 0) {
-                    timer_second += 3;
+                    timer_second += 20;
+                    //플랭크 쉬는 시간 설정
                     finalStopCheck = 1;
+                    pauseTimerCheck = true;
+                }
+                else if(finalStopCheck == 1) {
+                    if (plankTargetCount == plankCurrentCount)
+                    {
+                        timer_second += 3;
+                        finalStopCheck = 2;
+                    }
+                    else {
+                        timer_hour = Integer.parseInt(divideTime[0]);
+                        timer_minute = Integer.parseInt(divideTime[1]);
+                        timer_second = Integer.parseInt(divideTime[2]);
+                        plankCurrentCount++;
+                        pauseTimerCheck = false;
+                        finalStopCheck = 0;
+                    }
                 }
             }
         }
@@ -497,15 +530,19 @@ public class PlankActivity extends AppCompatActivity {
         LocalDateTime Measure2RoundStartTime_num = measure2RoundStart;
         measure2RoundEnd = LocalDateTime.now();
         LocalDateTime Measure2RoundEndTime_num = measure2RoundEnd;
+        int TargetCount = plankTargetCount;
+        int CurrentCount = plankCurrentCount;
 
         Measure2RoundsEntity Measure2RoundsTable = new Measure2RoundsEntity();
         Measure2RoundsTable.setMeasure2RoundStartTime(Measure2RoundStartTime_num);
         Measure2RoundsTable.setMeasure2RoundEndTime(Measure2RoundEndTime_num);
+        Measure2RoundsTable.setMeasure2RoundTargetCount(TargetCount);
+        Measure2RoundsTable.setMeasure2RoundCurrentCount(CurrentCount);
         MeasureRoomDatabase.getDatabase(getApplicationContext()).getMeasure2RoundsDao().insert(Measure2RoundsTable);
         //MeasureRoomDatabase.getDatabase(getApplicationContext()).getMeasure2RoundsDao().deleteAll(); 이건 삭제
 
         Toast.makeText(this, "전체 시간 저장", Toast.LENGTH_SHORT).show();
-        finalStopCheck = 2;
+        finalStopCheck = 3;
     }
 
 
