@@ -42,18 +42,21 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent;
                     if(switchButtonCheck==0) {
                         intent = new Intent(getApplicationContext(), PlankActivity.class);
+                        if(time.getText()==null){
+                            intent.putExtra("count","2");
+                        }
+                        else{
+                            intent.putExtra("count",Integer.parseInt(time.getText().toString()));
+                        }
+                        intent.putExtra("minute", picker.getHour());
+                        intent.putExtra("second", picker.getMinute());
                     }
                     else {
                         intent = new Intent(getApplicationContext(), MeasureActivity.class);
+                        intent.putExtra("hour", picker.getHour());
+                        intent.putExtra("minute", picker.getMinute());
                     }
-                    if(time.getText()==null){
-                        intent.putExtra("times","1");
-                    }
-                    else{
-                        intent.putExtra("times",time.getText());
-                    }
-                    intent.putExtra("hour", picker.getHour());
-                    intent.putExtra("minute", picker.getMinute());
+
                     startActivity(intent);
                     finish();
                 }
