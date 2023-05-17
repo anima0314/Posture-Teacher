@@ -488,7 +488,7 @@ public class PlankActivity extends AppCompatActivity {
 
                         divideTime = UseTimerTimeDB.split(":");
                         timer_minute = Integer.parseInt(divideTime[0]);
-                        timer_second = Integer.parseInt(divideTime[1] + 20);
+                        timer_second = Integer.parseInt(divideTime[1]); //+20 삭제
                         totalTime = ((timer_minute * 60) + timer_second) * 1000;
                         timer.scheduleAtFixedRate(timerTask, 10000, 1000); //Timer 실행
                     }
@@ -544,7 +544,7 @@ public class PlankActivity extends AppCompatActivity {
         Measure2DatasTable.setMeasure2DataStartTime(Measure2DataStartTime_num);
         Measure2DatasTable.setMeasure2DataEndTime(Measure2DataEndTime_num);
         Measure2DatasTable.setMeasure2RoundStartTimeFK(Measure2RoundStartTimeFK_num);
-        Measure2DatasTable.setMeasure2RoundDetectCount(detectCurrentCount);
+        Measure2DatasTable.setMeasure2DataDetectCount(detectCurrentCount);
         MeasureRoomDatabase.getDatabase(getApplicationContext()).getMeasure2DatasDao().insert(Measure2DatasTable);
         //MeasureRoomDatabase.getDatabase(getApplicationContext()).getMeasure2DatasDao().deleteAll(); 이건 삭제
 

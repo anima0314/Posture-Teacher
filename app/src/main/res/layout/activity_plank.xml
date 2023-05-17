@@ -121,7 +121,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#FF4081"
-                        android:text="끼얏호우"
+                        android:text=""
                         android:textSize="20dp" />
                 </LinearLayout>
 
