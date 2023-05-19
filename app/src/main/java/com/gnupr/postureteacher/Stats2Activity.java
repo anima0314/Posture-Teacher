@@ -23,7 +23,7 @@ import java.util.List;
 
 public class Stats2Activity extends AppCompatActivity {
     private ArrayList<StatsModel> arrayList;
-    private StatsAdapter statsAdapter;
+    private Stats2Adapter stats2Adapter;
     private RecyclerView recyclerView;
     private MeasureRoomDatabase db;
     @Override
@@ -45,6 +45,10 @@ public class Stats2Activity extends AppCompatActivity {
         Log.d("db","측정데이터 가져오기");
         int mralen = mrarray.size(); //mrarray의 길이 :반복문에서 시간 지연을 줄이기 위해 넣음
         for(int i=0; i < mralen; i++){
+            /*목표대비 달성율
+            한 사이클 측정 시간
+            측정횟수
+            */
             StatsModel statsModel = new StatsModel();   //입력 개체
             mrentity = mrarray.get(i);
             //측정ID
@@ -78,8 +82,8 @@ public class Stats2Activity extends AppCompatActivity {
             statsModel.setUnstable("처음 자세가 불안정해진 시간 : "+diffunstart.toMinutes() + "분 " + diffunstart.getSeconds() % 60 +"초"); //분은 그대로 초는 60으로 나눈 나머지 "분:초" 꼴로 ex) 12:55
             arrayList.add(statsModel);
         }
-        statsAdapter = new StatsAdapter(arrayList);
-        recyclerView.setAdapter(statsAdapter);
+        stats2Adapter = new Stats2Adapter(arrayList);
+        recyclerView.setAdapter(stats2Adapter);
 
         Button button = findViewById(R.id.change_button2);
         button.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +104,7 @@ public class Stats2Activity extends AppCompatActivity {
     }
 
     private void itemClick(){
-        statsAdapter.setOnItemClickListener((v, position) -> {
+        stats2Adapter.setOnItemClickListener((v, position) -> {
             int pos = arrayList.size()-1;
             Intent intent = new Intent(this,Stats2DetailActivity.class);
             intent.putExtra("id",arrayList.get(pos-position).getId());//데이터가 역순으로 들어가있어서 역순으로 id를 찾아야함.
