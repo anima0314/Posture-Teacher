@@ -100,6 +100,8 @@ public class PlankActivity extends AppCompatActivity {
     //예비 시간 측정해도 되는지
     private int tempTime = 0;
     //예비 시간의 임시 시간(정상화 최종 측정)
+    private int plankAllTimer = 0;
+    // 플랭크 시간을 초로 바꾸어 놓은 것
 
     LocalDateTime timeMeasure2DataStart = LocalDateTime.now();
     LocalDateTime timeMeasure2DataEnd = LocalDateTime.now();
@@ -328,7 +330,7 @@ public class PlankActivity extends AppCompatActivity {
             //오른쪽
 
 
-            if(20 <= globalTime) {
+            if(10 <= globalTime) {
                 if (!pauseTimerCheck && !breakTimeCheck) {
                     if (getResultPosture(resultPosture) == 2) {
                         if (spareTime >= 90) {
@@ -379,7 +381,7 @@ public class PlankActivity extends AppCompatActivity {
             }
 
             if(finalStopCheck == 2){
-                if(20 <= globalTime) {
+                if(10 <= globalTime) {
                     saveMeasure2Rounds();
                     if (spareTimeCheck) {
                         saveMeasure2Datas();
@@ -428,7 +430,7 @@ public class PlankActivity extends AppCompatActivity {
                     timer_minute--;
                 }
 
-                if(globalTime == 20) {
+                if(globalTime == 10) {
                     measure2RoundStart = LocalDateTime.now();
                 }
 
@@ -490,7 +492,7 @@ public class PlankActivity extends AppCompatActivity {
                         timer_minute = Integer.parseInt(divideTime[0]);
                         timer_second = Integer.parseInt(divideTime[1]); //+20 삭제
                         totalTime = ((timer_minute * 60) + timer_second) * 1000;
-                        timer.scheduleAtFixedRate(timerTask, 10000, 1000); //Timer 실행
+                        timer.scheduleAtFixedRate(timerTask, 20000, 1000); //Timer 실행
                     }
                 });
         AlertDialog msgDlg = msgBuilder.create();
@@ -498,7 +500,7 @@ public class PlankActivity extends AppCompatActivity {
     }
 
     public void onClickExit(View view) {
-        if(20 <= globalTime) {
+        if(10 <= globalTime) {
             if (finalStopCheck == 0) {
                 saveMeasure2Rounds();
                 if (spareTimeCheck) {
@@ -519,12 +521,14 @@ public class PlankActivity extends AppCompatActivity {
         LocalDateTime Measure2RoundEndTime_num = measure2RoundEnd;
         int TargetCount = plankTargetCount;
         int CurrentCount = plankCurrentCount;
+        int PlankTimer = plankAllTimer;
 
         Measure2RoundsEntity Measure2RoundsTable = new Measure2RoundsEntity();
         Measure2RoundsTable.setMeasure2RoundStartTime(Measure2RoundStartTime_num);
         Measure2RoundsTable.setMeasure2RoundEndTime(Measure2RoundEndTime_num);
         Measure2RoundsTable.setMeasure2RoundTargetCount(TargetCount);
         Measure2RoundsTable.setMeasure2RoundCurrentCount(CurrentCount);
+        Measure2RoundsTable.setMeasure2RoundPlankTimer(PlankTimer);
         MeasureRoomDatabase.getDatabase(getApplicationContext()).getMeasure2RoundsDao().insert(Measure2RoundsTable);
         //MeasureRoomDatabase.getDatabase(getApplicationContext()).getMeasure2RoundsDao().deleteAll(); 이건 삭제
 
@@ -795,7 +799,7 @@ public class PlankActivity extends AppCompatActivity {
         if (0 <= intervalTime && finishtimeed >= intervalTime)
         {
             if(1 <= globalTime) {
-                if(20 <= globalTime) {
+                if(10 <= globalTime) {
                     if (finalStopCheck == 0) {
                         saveMeasure2Rounds();
                         if (spareTimeCheck) {
@@ -823,6 +827,7 @@ public class PlankActivity extends AppCompatActivity {
         int intentSecond = intent.getIntExtra("second", 0);
         UseTimerTimeDB = intentMinute + ":" + intentSecond;
         plankTargetCount = intent.getIntExtra("count", 2);
+        plankAllTimer = (intentMinute*60) + intentSecond;
     }
 
     //pose
