@@ -25,15 +25,21 @@ public class Measure2RoundsEntity {
     @ColumnInfo
     private int Measure2RoundCurrentCount;
 
+    @ColumnInfo
+    private int Measure2RoundPlankTimer;
+
+
     public Measure2RoundsEntity() {
     }
 
-    public Measure2RoundsEntity(int DB_Measure2RoundID, LocalDateTime DB_Measure2RoundStartTime, LocalDateTime DB_Measure2RoundEndTime, int DB_Measure2RoundTargetCount, int DB_Measure2RoundCurrentCount) {
+    public Measure2RoundsEntity(int DB_Measure2RoundID, LocalDateTime DB_Measure2RoundStartTime, LocalDateTime DB_Measure2RoundEndTime,
+                                int DB_Measure2RoundTargetCount, int DB_Measure2RoundCurrentCount, int DB_Measure2RoundPlankTimer) {
         this.Measure2RoundID = DB_Measure2RoundID;
         this.Measure2RoundStartTime = DB_Measure2RoundStartTime;
         this.Measure2RoundEndTime = DB_Measure2RoundEndTime;
         this.Measure2RoundTargetCount = DB_Measure2RoundTargetCount;
         this.Measure2RoundCurrentCount = DB_Measure2RoundCurrentCount;
+        this.Measure2RoundPlankTimer = DB_Measure2RoundPlankTimer;
     }
 
     public int getMeasure2RoundID() {
@@ -61,5 +67,10 @@ public class Measure2RoundsEntity {
     public int getMeasure2RoundCurrentCount() { return Measure2RoundCurrentCount; }
     public void setMeasure2RoundCurrentCount(int Measure2RoundCurrentCount) {
         this.Measure2RoundCurrentCount = Measure2RoundCurrentCount;
+    }
+
+    public int getMeasure2RoundPlankTimer() { return Measure2RoundPlankTimer; }
+    public void setMeasure2RoundPlankTimer(int Measure2RoundPlankTimer) {
+        this.Measure2RoundPlankTimer = Measure2RoundPlankTimer;
     }
 }
