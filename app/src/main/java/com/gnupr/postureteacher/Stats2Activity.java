@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Stats2Activity extends AppCompatActivity {
-    private ArrayList<StatsModel> arrayList;
+    private ArrayList<Stats2Model> arrayList;
     private Stats2Adapter stats2Adapter;
     private RecyclerView recyclerView;
     private MeasureRoomDatabase db;
@@ -49,26 +49,29 @@ public class Stats2Activity extends AppCompatActivity {
             한 사이클 측정 시간
             측정횟수
             */
-            StatsModel statsModel = new StatsModel();   //입력 개체
+            Stats2Model statsModel = new Stats2Model();   //입력 개체
             mrentity = mrarray.get(i);
             //측정ID
             statsModel.setId(mrentity.getMeasure2RoundID()); // ex)3
+
+            //
             //총측정시간
             Duration diff = Duration.between( mrentity.getMeasure2RoundStartTime(), mrentity.getMeasure2RoundEndTime());//총 측정시간 계산
             Log.d("db",diff.toMinutes() + ":" + diff.getSeconds() % 60);    //로그
-            statsModel.setTime(diff.toMinutes() + "분 " + diff.getSeconds() % 60 +"초"); //분은 그대로 초는 60으로 나눈 나머지 "분:초" 꼴로 ex) 50:55
+            statsModel.setCycletime(diff.toMinutes() + "분 " + diff.getSeconds() % 60 +"초"); //분은 그대로 초는 60으로 나눈 나머지 "분:초" 꼴로 ex) 50:55
             //올바른 자세 비율
             LocalDateTime mrstrart = mrentity.getMeasure2RoundStartTime();    //측정 회차 시작시간
             //Log.d("db","측정시작 시간 : " + mrstrart);
             List<Measure2DatasEntity> mdarray = measure2DatasDAO.getTimeData(mrstrart);   //시작시간 기준으로 상세데이터 가져오기
             int totalsec = 0;
             int mdalen = mdarray.size(); //mdarray의 길이 :반복문에서 시간 지연을 줄이기 위해 넣음
+            //ok
             if(mdalen == 0){// 자세가 불안정해진적 없는 경우
-                statsModel.setPercent("100%"); //ex 50%
-                statsModel.setUnstable("완벽한 자세였습니다."); //분은 그대로 초는 60으로 나눈 나머지 "분:초" 꼴로 ex) 12:55
+                statsModel.setPercent("완벽한 자세였습니다."); //분은 그대로 초는 60으로 나눈 나머지 "분:초" 꼴로 ex) 12:55
                 arrayList.add(statsModel);
                 continue;
             }
+
             for(int k = 0; k<mdalen; k++){
                 mdentity = mdarray.get(k);
                 Duration diffmde = Duration.between(mdentity.getMeasure2DataStartTime(), mdentity.getMeasure2DataEndTime() ); //불안정한 자세 시작과 끝 시간
@@ -79,8 +82,12 @@ public class Stats2Activity extends AppCompatActivity {
             //처음자세가 불안정해진 시간
             Duration diffunstart = Duration.between(mrstrart,mdarray.get(0).getMeasure2DataStartTime()); // 전체 측정 시작 시간에서부터 처음 자세가 불안정해진 시간까지
             Log.d("db","처음 자세가 불안정해진시간 : " + mdarray.get(0).getMeasure2DataStartTime());
-            statsModel.setUnstable("처음 자세가 불안정해진 시간 : "+diffunstart.toMinutes() + "분 " + diffunstart.getSeconds() % 60 +"초"); //분은 그대로 초는 60으로 나눈 나머지 "분:초" 꼴로 ex) 12:55
+            statsModel.setLaps("처음 자세가 불안정해진 시간 : "+diffunstart.toMinutes() + "분 " + diffunstart.getSeconds() % 60 +"초"); //분은 그대로 초는 60으로 나눈 나머지 "분:초" 꼴로 ex) 12:55
+            //
+
+
             arrayList.add(statsModel);
+
         }
         stats2Adapter = new Stats2Adapter(arrayList);
         recyclerView.setAdapter(stats2Adapter);
@@ -108,9 +115,9 @@ public class Stats2Activity extends AppCompatActivity {
             int pos = arrayList.size()-1;
             Intent intent = new Intent(this,Stats2DetailActivity.class);
             intent.putExtra("id",arrayList.get(pos-position).getId());//데이터가 역순으로 들어가있어서 역순으로 id를 찾아야함.
-            intent.putExtra("time",arrayList.get(pos-position).getTime());
+            intent.putExtra("cycletime",arrayList.get(pos-position).getCycletime());
             intent.putExtra("percent",arrayList.get(pos-position).getPercent());
-            intent.putExtra("unstable",arrayList.get(pos-position).getUnstable());
+            intent.putExtra("laps",arrayList.get(pos-position).getLaps());
             startActivity(intent);
             finish();
         });

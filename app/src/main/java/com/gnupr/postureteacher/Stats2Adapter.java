@@ -12,9 +12,9 @@ import java.util.ArrayList;
 
 public class Stats2Adapter extends RecyclerView.Adapter<Stats2Adapter.ViewHoler>{
 
-    private ArrayList<StatsModel> arrayList;
+    private ArrayList<Stats2Model> arrayList;
 
-    public Stats2Adapter(ArrayList<StatsModel> arrayList) {
+    public Stats2Adapter(ArrayList<Stats2Model> arrayList) {
         this.arrayList = arrayList;
     }
 
@@ -42,21 +42,17 @@ public class Stats2Adapter extends RecyclerView.Adapter<Stats2Adapter.ViewHoler>
     public void onBindViewHolder(@NonNull ViewHoler holder, int position) {
         int pos = arrayList.size()-1;
         holder.tv_id.setText("측정 id : " + arrayList.get(pos-position).getId() + "번");
-        holder.tv_time.setText("1회 측정시간 : "+arrayList.get(pos-position).getTime());
+        holder.tv_time.setText("한회당 측정시간 : "+arrayList.get(pos-position).getCycletime());
         holder.tv_percent.setText("목표대비 달성율 : "+arrayList.get(pos-position).getPercent());
-        holder.tv_unstable.setText("측정 횟수 : "+arrayList.get(pos-position).getUnstable());
-        /*목표대비 달성율
-        한 사이클 측정 시간
-        측정횟수
-        */
+        holder.tv_unstable.setText("실제 측정 횟수 : "+arrayList.get(pos-position).getLaps());
     }
-
     @Override
     public int getItemCount() {
         return arrayList.size();
     }
 
     public class ViewHoler extends RecyclerView.ViewHolder {
+        //xml id는 수정 못함
         protected TextView tv_id;
         protected TextView tv_time;
         protected TextView tv_percent;

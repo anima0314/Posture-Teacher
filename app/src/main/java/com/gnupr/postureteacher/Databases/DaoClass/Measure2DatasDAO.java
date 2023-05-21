@@ -32,4 +32,6 @@ public interface Measure2DatasDAO {
     //Select Date Data
     @Query("SELECT * FROM Measure2Datas WHERE Measure2RoundStartTimeFK = :Measure2RoundStartTime")
     List<Measure2DatasEntity> getTimeData(LocalDateTime Measure2RoundStartTime);
+
+    //회차단위로 가져오는 쿼리문을 만들어야함 시작시간 + 측정횟수를 가지고
 }
