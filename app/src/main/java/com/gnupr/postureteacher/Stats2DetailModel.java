@@ -19,9 +19,10 @@ public class Stats2DetailModel {
         return time;
     }
 
-    public void setTime(String first_time) {
+    public void setTime(String time) {
         this.time = time;
     }
+
     public String getPercent() {
         return percent;
     }

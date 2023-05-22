@@ -42,9 +42,9 @@ public class Stats2Adapter extends RecyclerView.Adapter<Stats2Adapter.ViewHoler>
     public void onBindViewHolder(@NonNull ViewHoler holder, int position) {
         int pos = arrayList.size()-1;
         holder.tv_id.setText("측정 id : " + arrayList.get(pos-position).getId() + "번");
-        holder.tv_time.setText("한회당 측정시간 : "+arrayList.get(pos-position).getCycletime());
+        holder.tv_time.setText("회당 측정시간 : "+arrayList.get(pos-position).getCycletime()/60+"분"+arrayList.get(pos-position).getCycletime()%60+"초");
         holder.tv_percent.setText("목표대비 달성율 : "+arrayList.get(pos-position).getPercent());
-        holder.tv_unstable.setText("실제 측정 횟수 : "+arrayList.get(pos-position).getLaps());
+        holder.tv_unstable.setText("실제 측정 횟수 : "+arrayList.get(pos-position).getLaps()+"회");
     }
     @Override
     public int getItemCount() {

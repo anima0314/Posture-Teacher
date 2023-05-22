@@ -2,7 +2,7 @@ package com.gnupr.postureteacher;
 
 public class Stats2Model {
     private int id;
-    private String cycletime;
+    private int cycletime;
     private String percent;
     private String laps;
 
@@ -15,11 +15,11 @@ public class Stats2Model {
         this.id = id;
     }
 
-    public String getCycletime() {
+    public int getCycletime() {
         return cycletime;
     }
 
-    public void setCycletime(String cycletime) {
+    public void setCycletime(int cycletime) {
         this.cycletime = cycletime;
     }
 
@@ -42,7 +42,7 @@ public class Stats2Model {
 
     public Stats2Model(){
     }
-    public Stats2Model(int id, String cycletime, String percent, String unstable) {
+    public Stats2Model(int id, int cycletime, String percent, String unstable) {
         this.id = id;
         this.cycletime = cycletime;
         this.percent = percent;
