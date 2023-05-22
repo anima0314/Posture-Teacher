@@ -507,6 +507,11 @@ public class PlankActivity extends AppCompatActivity {
                     saveMeasure2Datas();
                 }
             }
+            else if (finalStopCheck == 1) {
+                if (spareTimeCheck) {
+                    saveMeasure2Datas();
+                }
+            }
         }
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -802,6 +807,11 @@ public class PlankActivity extends AppCompatActivity {
                 if(10 <= globalTime) {
                     if (finalStopCheck == 0) {
                         saveMeasure2Rounds();
+                        if (spareTimeCheck) {
+                            saveMeasure2Datas();
+                        }
+                    }
+                    else if (finalStopCheck == 1) {
                         if (spareTimeCheck) {
                             saveMeasure2Datas();
                         }
