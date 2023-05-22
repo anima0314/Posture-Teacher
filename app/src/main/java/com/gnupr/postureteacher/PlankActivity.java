@@ -363,10 +363,11 @@ public class PlankActivity extends AppCompatActivity {
                 else if (breakTimeCheck && finalStopCheck == 1) {
                     if(spareTime <= 0) {
                         saveMeasure2Datas();
-                        spareTime = 100;
                         //쉬는 단계에 접어들 때 자세가 흐트러져 있을 경우 spareTime이 0 아래이면 그냥 저장을 해버림
                         //이미 시간 관련 정보는 다른 곳에서 저장되었기에 별 상관없음
                     }
+                    spareTimeCheck = false;
+                    spareTime = 100;
                 }
             }
 
