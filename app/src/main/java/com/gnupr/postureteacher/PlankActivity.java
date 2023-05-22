@@ -96,6 +96,8 @@ public class PlankActivity extends AppCompatActivity {
     //감지 예비 시간
     private int spareTimeMinus = 1;
     //예비 시간 빼는 값
+    private int spareTimeMinusMult = 2;
+    //예비 시간 빼는 값에 배율을 곱해주기(빠르게 전용)
     private boolean spareTimeCheck = false;
     //예비 시간 측정해도 되는지
     private int tempTime = 0;
@@ -737,7 +739,7 @@ public class PlankActivity extends AppCompatActivity {
                 return 2;
             }
             else {
-                spareTimeMinus = 4;
+                spareTimeMinus = 4 * spareTimeMinusMult;
                 return 1;
             }
         }
@@ -747,11 +749,11 @@ public class PlankActivity extends AppCompatActivity {
                 return 2;
             }
             else if(oneCount == 1) {
-                spareTimeMinus = 2;
+                spareTimeMinus = 2 * spareTimeMinusMult;
                 return 1;
             }
             else {
-                spareTimeMinus = 4;
+                spareTimeMinus = 4 * spareTimeMinusMult;
                 return 1;
             }
         }
@@ -761,15 +763,15 @@ public class PlankActivity extends AppCompatActivity {
                 return 2;
             }
             else if(oneCount == 1) {
-                spareTimeMinus = 1;
+                spareTimeMinus = 1 * spareTimeMinusMult;
                 return 1;
             }
             else if(oneCount == 2) {
-                spareTimeMinus = 2;
+                spareTimeMinus = 2 * spareTimeMinusMult;
                 return 1;
             }
             else {
-                spareTimeMinus = 4;
+                spareTimeMinus = 4 * spareTimeMinusMult;
                 return 1;
             }
         }
@@ -779,19 +781,19 @@ public class PlankActivity extends AppCompatActivity {
                 return 2;
             }
             else if(oneCount == 1) {
-                spareTimeMinus = 1;
+                spareTimeMinus = 1 * spareTimeMinusMult;
                 return 1;
             }
             else if(oneCount == 2) {
-                spareTimeMinus = 2;
+                spareTimeMinus = 2 * spareTimeMinusMult;
                 return 1;
             }
             else if(oneCount == 3) {
-                spareTimeMinus = 3;
+                spareTimeMinus = 3 * spareTimeMinusMult;
                 return 1;
             }
             else {
-                spareTimeMinus = 4;
+                spareTimeMinus = 4 * spareTimeMinusMult;
                 return 1;
             }
         }
