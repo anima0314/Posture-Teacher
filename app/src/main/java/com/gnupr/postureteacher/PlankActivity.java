@@ -511,6 +511,7 @@ public class PlankActivity extends AppCompatActivity {
                 }
             }
             else if (finalStopCheck == 1) {
+                saveMeasure2Rounds();
                 if (spareTimeCheck) {
                     saveMeasure2Datas();
                 }
@@ -815,6 +816,7 @@ public class PlankActivity extends AppCompatActivity {
                         }
                     }
                     else if (finalStopCheck == 1) {
+                        saveMeasure2Rounds();
                         if (spareTimeCheck) {
                             saveMeasure2Datas();
                         }
