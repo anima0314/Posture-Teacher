@@ -78,7 +78,7 @@ public class Stats2DetailActivity extends AppCompatActivity {
             //자세가 불안정하지않으면
             if(mddalen == 0){
                 statsDetailModel.setTime("완벽한 자세였습니다.");
-                statsDetailModel.setPercent("100");
+                statsDetailModel.setPercent("100%");
                 arrayList.add(statsDetailModel);
                 continue;
             }
